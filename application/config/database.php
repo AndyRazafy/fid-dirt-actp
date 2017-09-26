@@ -73,12 +73,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+// $db['default'] = array(
+// 	'dsn'	=> '',
+// 	'hostname' => 'ec2-107-22-219-34.compute-1.amazonaws.com',
+// 	'username' => 'brplyjgteonahu',
+// 	'password' => 'd683f438efb2f0e8854063da62beb43d4e37b3aac5acf70547d78ff961bf233e',
+// 	'database' => 'ddjh5lihuoqjm8',
+// 	'dbdriver' => 'postgre',
+// 	'port' => '5432',
+// 	'dbprefix' => '',
+// 	'pconnect' => FALSE,
+// 	'db_debug' => (ENVIRONMENT !== 'production'),
+// 	'cache_on' => FALSE,
+// 	'cachedir' => '',
+// 	'char_set' => 'utf8',
+// 	'dbcollat' => 'utf8_general_ci',
+// 	'swap_pre' => '',
+// 	'encrypt' => FALSE,
+// 	'compress' => FALSE,
+// 	'stricton' => FALSE,
+// 	'failover' => array(),
+// 	'save_queries' => TRUE
+// );
+
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'ec2-107-22-219-34.compute-1.amazonaws.com',
-	'username' => 'brplyjgteonahu',
-	'password' => 'd683f438efb2f0e8854063da62beb43d4e37b3aac5acf70547d78ff961bf233e',
-	'database' => 'ddjh5lihuoqjm8',
+	'hostname' => '127.0.0.1',
+	'username' => 'postgres',
+	'password' => 'andy',
+	'database' => 'actp',
 	'dbdriver' => 'postgre',
 	'port' => '5432',
 	'dbprefix' => '',

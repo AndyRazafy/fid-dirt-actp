@@ -1,0 +1,57 @@
+<?php
+	require_once("Base_Modele.php");
+
+	class Dir_Modele extends Base_Modele
+	{
+		function __construct()
+		{
+			parent::__construct();
+		}
+
+		public function save()
+		{
+			
+		}
+
+		public function update()
+		{
+		}
+
+		public function delete()
+		{
+		}
+
+		public function findById($id)
+		{
+			$query = $this->db->get_where('dir', array('id' => $id));
+			$result = $query->result();
+
+			$this->load->library('Dir');
+			$dir = new Dir();
+			$dir->setId($result[0]->id);
+			$dir->setNom($result[0]->nom);
+
+			return $dir;
+		}
+
+		public function findAll()
+		{
+			$this->db->select("*");
+			$this->db->from("dir");
+			$query = $this->db->get();        
+			$result = $query->result();
+
+			$this->load->library("Dir");
+			$array = array();
+			foreach ($result as $row)
+			{
+				$dir = new Dir();
+				$dir->setId($row->id);
+				$dir->setNom($row->nom);
+				
+				array_push($array, $dir);
+			}
+
+			return $array;
+		}
+	}
