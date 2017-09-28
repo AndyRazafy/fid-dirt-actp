@@ -4,7 +4,7 @@
   					<div class="panel-heading">
 						<div class="panel-title">
 							<h4>
-								Stat interventions
+								Phase
 							</h4>
 						</div>
 					</div>

@@ -329,7 +329,14 @@
 		{
 			$current_page = $this->input->get("page");
 			$rang = $this->input->get("rang");
+			$gtNom = $this->input->get("gtnom");
 			$tri = $this->input->get("tri");
+
+			$search_criteria["rang"] = $rang;
+			$search_criteria["gtnom"] = $gtNom;
+			$search_criteria["tri"] = $tri;
+
+			$search_url = "rang=".$search_criteria["rang"]."&gtnom=".$search_criteria["gtnom"]."&tri=".$tri;
 
 			$this->load->model("Intervention_Model");
 			$interventions = $this->Intervention_Model->findAll();  
@@ -352,22 +359,40 @@
 			$operand = array();
 			$value = array();
 
-			if($rang != "")
+			if($rang != "" && $rang != "all")
 			{
 				array_push($key, "rang");
 				array_push($operand, "=");
 				array_push($value, $rang);
 			}
 
-			$columns = array("*");
+			if($gtNom != "")
+			{
+				array_push($key, "gt.nom");
+				array_push($operand, "LIKE");
+				array_push($value, "UPPER('%".$gtNom."%')");
+			}
+
+			array_push($key, "(drpaiement1 is null OR drpaiement2 is null OR drpaiement3 is null)");
+			array_push($operand, "");
+			array_push($value, "");
+
+			$columns = array("i.*");
 			$conditions = array(
 				0 => $key,
 				1 => $operand,
 				2 => $value
 			);
+
+			$joinskey = array("groupetravail gt");
+			$joinsrelation = array("ON gt.id = i.groupetravail_id");
+
 			$orderby = $tri;
-			$joins = array();
-			$tableName = "intervention";
+			$joins = array(
+				0 => $joinskey,
+				1 => $joinsrelation
+			);
+			$tableName = "intervention i";
 
 			$interventions = $this->Intervention_Model->find($columns, $conditions, $joins, $orderby, $tableName);
 
@@ -381,6 +406,8 @@
 
 			$interventions = array_slice($interventions, $debutpage-1, $elements);
 
+			$data["search_criteria"] = $search_criteria;
+			$data["search_url"] = $search_url;
 			$data["max_rang"] = $maxRang;
 			$data["debut"] = $debutpage;
 			$data["pages"] = $pages;

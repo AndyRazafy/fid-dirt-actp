@@ -173,7 +173,7 @@
 				for($i = 0;$i < $len;$i++)
 				{
 					$sql .= " JOIN ";
-					for($j = 0;$j < $row;$j++)
+					for($j = 0;$j < $rows;$j++)
 					{
 						$sql .= " ".$joins[$j][$i];
 					}

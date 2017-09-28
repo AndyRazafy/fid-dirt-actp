@@ -14,20 +14,29 @@
 
 					<div class="panel-body">
 						<div class="col-lg-12">
-			  				<form action="<?php echo site_url('GroupeTravail_Controller/recherche'); ?>" method="GET" role="form">
+			  				<form action="<?php echo site_url('Intervention_Controller/etatPaiement'); ?>" method="GET" role="form">
 								<input type="hidden" name="page" value="1">
 								<div class="form-group col-lg-2">
                             		<label for="rang">intervention</label>
                             		<select class="form-control" name="rang">
+                            			<option value="all">tout</option>
 										<?php for ($i = 1;$i <= $max_rang;$i++) { ?>
 											<option value="<?php echo $i; ?>"><?php echo "ACTP".$i; ?></option>
 										<?php } ?>
 									</select>
                             	</div>
+                            	<div class="form-group col-sm-3">
+										<label>GT</label>
+										<input type="text" class="form-control" placeholder="Ex: BELANITRA" name="gtnom" value="<?php echo $search_criteria["gtnom"]; ?>">
+									</div>
 								<button type="submit" class="btn btn-primary" style="margin-top: 22px;">
 									<i class="glyphicon glyphicon-search"></i>
 								</button>
 							</form>
+						</div>
+
+						<div class="col-lg-12">
+							<hr>
 						</div>
 
 						<table class="table table-bordered table-hover">
@@ -68,17 +77,11 @@
 
 						<div>
 							<ul class="pagination">
-								<li>
-									<a href="<?php echo site_url('Intervention_Controller/etatPaiement?page=2'); ?>">precedant</a>
-								</li>
 								<?php 
 									foreach ($pages as $row) 
 									{ ?>
-										<li class="<?php echo $row->getBootstrapClassName(); ?>"><a href="<?php echo site_url('Intervention_Controller/etatPaiement?page='.$row->getPage()); ?>"><?php echo $row->getPage(); ?></a></li>
+										<li class="<?php echo $row->getBootstrapClassName(); ?>"><a href="<?php echo site_url('Intervention_Controller/etatPaiement?page='.$row->getPage().'&'.$search_url); ?>"><?php echo $row->getPage(); ?></a></li>
 								<?php } ?>
-								<li>
-									<a href="<?php echo site_url('Intervention_Controller/etatPaiement?page=2'); ?>">suivant</a>
-								</li>
 							</ul>
 						</div>
 					</div>	

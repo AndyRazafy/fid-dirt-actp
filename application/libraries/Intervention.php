@@ -404,9 +404,20 @@
 
 			$interval = date_diff($datetime1, $datetime2);
 
-			$diff_days = $interval->days;
-
-			return $interval->format($diff_days." jour(s)");
+			if($datetime1 > $datetime2)
+			{
+				if($interval->days >= 0 && $interval->days <= 30)
+					return $interval->format("dans ".$interval->days." jour(s)");
+				else
+					return $interval->format("dans %m mois(s)");
+			}
+			else
+			{
+				if($interval->days >= 0 && $interval->days <= 30)
+					return $interval->format("il y a ".$interval->days." jour(s)");
+				else
+					return $interval->format("il y a %m moi(s)");
+			}			
 		}
 
 		public function getIntitules(){

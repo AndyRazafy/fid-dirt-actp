@@ -88,6 +88,7 @@
 				$tableName = "intervention";
 
 				$interventions = $this->Intervention_Model->find($columns, $conditions, $joins, $orderby, $tableName);
+				$gt->setInterventions($interventions);
 
 				$this->load->model("InterventionIntitule_Model");
 
@@ -170,8 +171,8 @@
 				$tableName = "groupetravail";
 
 				$gts = $this->GroupeTravail_Model->find($columns, $conditions, $joins, $orderby, $tableName);
-
 				$liste = $gts;
+
 				$this->load->library("Pagination");
 				$pagination = new Pagination();
 
@@ -190,7 +191,6 @@
 				$data["phases"] = $phases;
 				$data["intitules"] = $intitules;
 				$data["unites"] = $unites;
-				// $data["nb_paiement"] = $nbPaiement;
 				$data["interventions"] = $interventions;
 				$data["groupetravail"] = $gt;
 				$data["contents"] = "fiche_groupetravail_View";

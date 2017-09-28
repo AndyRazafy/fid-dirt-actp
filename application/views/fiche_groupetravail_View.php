@@ -48,7 +48,18 @@
 			  					<div class="content-group">
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php 
-			  								echo $groupetravail->getPhase($interventions);
+			  								echo $groupetravail->getTerroir()->getAgencePaiement()->getNom();
+			  							?>
+			  						</h5>
+			  						<span class="text-muted text-size-small" >AGENCE PAYEUR</span>
+			  					</div>
+			  				</div>
+
+			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
+			  					<div class="content-group">
+			  						<h5 class="text-semibold no-margin" style="margin: 0;">
+			  							<?php 
+			  								echo $groupetravail->getPhase();
 			  							?>
 			  						</h5>
 			  						<span class="text-muted text-size-small" >PHASE</span>
@@ -101,7 +112,7 @@
 						                <h4 class="modal-title">Creation</h4>
 						            </div>
 						            <div class="modal-body">
-						            	<p>Voulez-vous vraiment creer ACTP<?php echo $intervention_rang_suiv; ?>?</p>
+						            	<h3>Voulez-vous vraiment creer ACTP<?php echo $intervention_rang_suiv; ?>?</h3>
 						            </div>
 						            <div class="modal-footer">
 						                <a href="#" class="btn btn-success" onclick="javascript:validationIntervention(<?php echo '\'#formCreationIntervention\''; ?>);" data-dismiss="">Valider</a>

@@ -39,14 +39,14 @@
 												<label>* nombre de sous activite (SA)</label>
 												<input class="form-control" type="number" name="nbsa" value="<?php echo $terroir->getNbsa(); ?>" min="0" required>
 											</div>
-											<div class="form-group">
+											<!-- <div class="form-group">
 												<label>* nombre de beneficiaire</label>
 												<input class="form-control" type="number" name="nbBenef" value="<?php echo $terroir->getNbBenef(); ?>" min="0" required>
 											</div>
 											<div class="form-group">
 												<label>* nombre inapte</label>
 												<input class="form-control" type="number" name="nbInapte" value="<?php echo $terroir->getNbInapte(); ?>" min="0" required>
-											</div>
+											</div> -->
 
 											<div class="modal-footer">
 		                                    	<button type="button" onClick="javascript:confirmation();" class="btn btn-primary">Modifier</button>
@@ -78,7 +78,7 @@
 				  				<div class="col-lg-3" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo $terroir->getNbBenef(); ?>
+				  							<?php echo number_format($terroir->getNbBenef(), 0, ",", " "); ?>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >BENEFICIAIRES</span>
 				  					</div>
@@ -87,7 +87,7 @@
 				  				<div class="col-lg-3" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo $terroir->getNbInapte(); ?>
+				  							<?php echo number_format($terroir->getNbInapte(), 0, ",", " "); ?>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >INAPTES</span>
 				  					</div>
@@ -182,7 +182,10 @@
 	                                <!-- Modal content-->
 	                                <div class="modal-content">
 	                                    <div class="modal-header">
-	                                        <h4 class="modal-title">Planification</h4>
+	                                        <h4 class="modal-title">
+	                                        	Planification
+	                                        </h4>
+	                                        <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
 	                                    </div>
 	                                    <div class="modal-body">				
 											<div class="form-group">
@@ -216,7 +219,7 @@
 												<input class="form-control" type="date" name="drFinPlan" value="<?php echo $terroir->getDrFinPlan(); ?>">
 											</div>
 											<div class="form-group">
-												<label>montant reel</label>
+												<label>* montant reel</label>
 												<input class="form-control" type="number" name="montantReelPlan" value="<?php echo $terroir->getMontantReelPlan(); ?>" min="0" min="0" required>
 											</div>
 											<div class="form-group">
@@ -228,7 +231,7 @@
 												<input class="form-control" type="date" name="drApprobPamo" value="<?php echo $terroir->getDrApprobPamo(); ?>">
 											</div>
 											<div class="form-group">
-												<label>montant total PAMO</label>
+												<label>* montant total PAMO</label>
 												<input class="form-control" type="number" name="montantTotalPamo" value="<?php echo $terroir->getMontantTotalPamo(); ?>" min="0" required>
 											</div>
 
@@ -308,7 +311,10 @@
 	                                <!-- Modal content-->
 	                                <div class="modal-content">
 	                                    <div class="modal-header">
-	                                        <h4 class="modal-title">Ciblage</h4>
+	                                        <h4 class="modal-title">
+	                                        	Ciblage
+	                                        </h4>
+	                                        <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
 	                                    </div>
 	                                    <div class="modal-body">				
 											<div class="form-group">
@@ -342,7 +348,7 @@
 												<input class="form-control" type="date" name="drFinCible" value="<?php echo $terroir->getDpFinCible(); ?>">
 											</div>
 											<div class="form-group">
-												<label>montant reelle</label>
+												<label>* montant reelle</label>
 												<input class="form-control" type="number" name="montantReelCible" value="<?php echo $terroir->getMontantReelCible(); ?>" min="0" required>
 											</div>
 											<div class="form-group">
@@ -426,7 +432,10 @@
 	                                <!-- Modal content-->
 	                                <div class="modal-content">
 	                                    <div class="modal-header">
-	                                        <h4 class="modal-title">AGEC</h4>
+	                                        <h4 class="modal-title">
+	                                        	AGEC
+	                                        </h4>
+	                                        <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
 	                                    </div>
 	                                    <div class="modal-body">
 	                                    	<div class="form-group">
@@ -460,11 +469,11 @@
 												<input class="form-control" type="date" name="drFinAgec" value="<?php echo $terroir->getDrFinAgec(); ?>">
 											</div>
 											<div class="form-group">
-												<label>Montant total</label>
+												<label>* Montant total</label>
 												<input class="form-control" type="number" name="montantTotalAgec" value="<?php echo $terroir->getMontantTotalAgec(); ?>" min="0" required>
 											</div>
 											<div class="form-group">
-												<label>Montant total confie</label>
+												<label>* Montant total confie</label>
 												<input class="form-control" type="number" name="montantTotalConfieAgec" value="<?php echo $terroir->getMontantTotalConfieAgec(); ?>" min="0" required>
 											</div>
 
@@ -525,7 +534,10 @@
 	                                <!-- Modal content-->
 	                                <div class="modal-content">
 	                                    <div class="modal-header">
-	                                        <h4 class="modal-title">Paiement</h4>
+	                                        <h4 class="modal-title">
+	                                        	Paiement
+	                                        </h4>
+	                                        <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
 	                                    </div>
 	                                    <div class="modal-body">
 	                                    	<div class="form-group">
@@ -543,12 +555,8 @@
 												<input class="form-control" type="text" name="codemarchePaie" value="<?php echo $terroir->getCodemarchePaie(); ?>">
 											</div>
 											<div class="form-group">
-												<label>montant reel</label>
+												<label>* montant reel</label>
 												<input class="form-control" type="number" name="montantReelPaie" value="<?php echo $terroir->getMontantReelPaie(); ?>" min="0" required>
-											</div>
-											<div class="form-group">
-												<label>agence de paiement</label>
-												<input class="form-control" type="number" value="">
 											</div>
 											<div class="modal-footer">
 	                                    		<button type="button" onClick="javascript:confirmation();" class="btn btn-primary">Modifier</button>
@@ -587,12 +595,12 @@
 							              	</thead>
 							              	<tbody>
 							                	<tr>
-							                  		<td class="text-center"><?php echo $terroir->getNbPrevHommeJourApte(); ?></td>
-													<td class="text-center"><?php echo $terroir->getNbReelHommeJourApte(); ?></td>
-													<td class="text-center"><?php echo $terroir->getPrevSurfTraiteeCes(); ?></td>
-													<td class="text-center"><?php echo $terroir->getRealSurfTraiteeCes(); ?></td>
-													<td class="text-center"><?php echo $terroir->getprevSurfReboiseeFsp(); ?></td>
-													<td class="text-center"><?php echo $terroir->getRealSurfReboiseeFsp(); ?></td>
+							                  		<td class="text-center"><?php echo number_format($terroir->getNbPrevHommeJourApte(), 0, ",", " "); ?></td>
+													<td class="text-center"><?php echo number_format($terroir->getNbReelHommeJourApte(), 0, ",", " "); ?></td>
+													<td class="text-center"><?php echo number_format($terroir->getPrevSurfTraiteeCes(), 3, ",", " "); ?></td>
+													<td class="text-center"><?php echo number_format($terroir->getRealSurfTraiteeCes(), 3, ",", " "); ?></td>
+													<td class="text-center"><?php echo number_format($terroir->getprevSurfBoiseeFsp(), 3, ",", " "); ?></td>
+													<td class="text-center"><?php echo number_format($terroir->getRealSurfBoiseeFsp(), 3, ",", " "); ?></td>
 							                	</tr>
 							              	</tbody>
 							            </table>
@@ -641,7 +649,10 @@
 	                                <!-- Modal content-->
 	                                <div class="modal-content">
 	                                    <div class="modal-header">
-	                                        <h4 class="modal-title">Autres indicateurs</h4>
+	                                        <h4 class="modal-title">
+	                                        	Autres indicateurs
+	                                        </h4>
+	                                        <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
 	                                    </div>
 	                                    <div class="modal-body">				
 											<div class="form-group">
@@ -649,11 +660,11 @@
 												<input class="form-control" type="text" name="libelleAutreIndic" value="<?php echo $terroir->getLibelleAutreIndic(); ?>">
 											</div>
 											<div class="form-group">
-												<label>prevision</label>
+												<label>* prevision</label>
 												<input class="form-control" type="number" name="prevAutreIndic" value="<?php echo $terroir->getPrevAutreIndic(); ?>" min="0" step="0.01" required>
 											</div>
 											<div class="form-group">
-												<label>realisation</label>
+												<label>* realisation</label>
 												<input class="form-control" type="number" name="realAutreIndic" value="<?php echo $terroir->getRealAutreIndic(); ?>" min="0" step="0.01" required>
 											</div>
 											<div class="form-group">

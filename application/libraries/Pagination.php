@@ -49,11 +49,11 @@
 
     	public function suivant($liste, $element)
     	{
-    		$suivant = 0;
+    		$suivant = null;
     		$taille = sizeof($liste);
     		for ($i=0; $i < $taille; $i++) 
     		{ 
-    			if($liste[$i] == $element)
+    			if($liste[$i]->getId() == $element->getId())
     			{
     				if($i+1 < $taille)
     					$suivant = $liste[$i +1];
@@ -66,11 +66,11 @@
 
     	public function precedent($liste, $element)
     	{
-    		$precedent = 0;
+    		$precedent = null;
     		$taille = sizeof($liste);
     		for ($i=0; $i < $taille; $i++) 
     		{ 
-    			if($liste[$i] == $element)
+    			if($liste[$i]->getId() == $element->getId())
     			{
     				if($i -1 > 0)
     					$precedent = $liste[$i -1];

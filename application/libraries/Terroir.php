@@ -41,8 +41,8 @@
 
 		private $prevSurfTraiteeCes;
 		private $realSurfTraiteeCes;
-		private $prevSurfReboiseeFsp;
-		private $realSurfReboiseeFsp;
+		private $prevSurfBoiseeFsp;
+		private $realSurfBoiseeFsp;
 
 		private $libelleAutreIndic;
 		private $prevAutreIndic;
@@ -123,8 +123,8 @@
 				else
 					$terroir->setCp(new ChargeProjet());
 				
-				$terroir->setNbBenef($row->nbbenef);
-				$terroir->setNbInapte($row->nbinapte);
+				//$terroir->setNbBenef($row->nbbenef);
+				//$terroir->setNbInapte($row->nbinapte);
 				$terroir->setNbsa($row->nbsa);
 				
 				$terroir->setDpEngPlan($row->dpengplan);
@@ -156,8 +156,8 @@
 				
 				// $terroir->setPrevSurfTraiteeCes($row->prevsurftraiteeces);
 				// $terroir->setRealSurfTraiteeCes($row->realsurftraiteeces);
-				// $terroir->setPrevSurfReboiseeFsp($row->prevsurfreboiseefsp);
-				// $terroir->setRealSurfReboiseeFsp($row->realsurfreboiseefsp);
+				// $terroir->setPrevSurfBoiseeFsp($row->prevsurfBoiseefsp);
+				// $terroir->setRealSurfBoiseeFsp($row->realsurfBoiseefsp);
 
 				$terroir->setLibelleAutreIndic($row->libelleautreindic);
 				$terroir->setPrevAutreIndic($row->prevautreindic);
@@ -195,7 +195,17 @@
 		}
 
 		public function getNbBenef(){
-			return $this->nbBenef;
+			//return $this->nbBenef;
+
+			$nb = 0;
+			foreach ($this->getGroupeTravails() as $gt)
+			{
+				foreach ($gt->getInterventions() as $inter)
+				{
+					$nb += $inter->getNbReelBenef();
+				}
+			}
+			return $nb;
 		}
 
 		public function setNbBenef($nbBenef){
@@ -203,7 +213,17 @@
 		}
 
 		public function getNbInapte(){
-			return $this->nbInapte;
+			//return $this->nbInapte;
+
+			$nb = 0;
+			foreach ($this->getGroupeTravails() as $gt)
+			{
+				foreach ($gt->getInterventions() as $inter)
+				{
+					$nb += $inter->getNbBenefInapte();
+				}
+			}
+			return $nb;
 		}
 
 		public function setNbInapte($nbInapte){
@@ -468,7 +488,7 @@
 			$nb = 0;
 			foreach ($this->getGroupeTravails() as $gt)
 			{
-				foreach ($gt as $inter)
+				foreach ($gt->getInterventions() as $inter)
 				{
 					$nb += $inter->getPrevSurfTraiteeCes();
 				}
@@ -485,7 +505,7 @@
 			$nb = 0;
 			foreach ($this->getGroupeTravails() as $gt)
 			{
-				foreach ($gt as $inter)
+				foreach ($gt->getInterventions() as $inter)
 				{
 					$nb += $inter->getRealSurfTraiteeCes();
 				}
@@ -497,38 +517,38 @@
 			$this->realSurfTraiteeCes = $realSurfTraiteeCes;
 		}
 
-		public function getPrevSurfReboiseeFsp()
+		public function getPrevSurfBoiseeFsp()
 		{
 			$nb = 0;
 			foreach ($this->getGroupeTravails() as $gt)
 			{
-				foreach ($gt as $inter)
+				foreach ($gt->getInterventions() as $inter)
 				{
-					$nb += $inter->getPrevSurfReboiseeFsp();
+					$nb += $inter->getPrevSurfBoiseeFSP();
 				}
 			}
 			return $nb;
 		}
 
-		public function setPrevSurfReboiseeFsp($prevSurfReboiseeFsp){
-			$this->prevSurfReboiseeFsp = $prevSurfReboiseeFsp;
+		public function setPrevSurfBoiseeFsp($prevSurfBoiseeFsp){
+			$this->prevSurfBoiseeFsp = $prevSurfBoiseeFSP;
 		}
 
-		public function getRealSurfReboiseeFsp()
+		public function getRealSurfBoiseeFsp()
 		{
 			$nb = 0;
 			foreach ($this->getGroupeTravails() as $gt)
 			{
-				foreach ($gt as $inter)
+				foreach ($gt->getInterventions() as $inter)
 				{
-					$nb += $inter->getRealSurfReboiseeFsp();
+					$nb += $inter->getRealSurfBoiseeFSP();
 				}
 			}
 			return $nb;
 		}
 
-		public function setRealSurfReboiseeFsp($realSurfReboiseeFsp){
-			$this->realSurfReboiseeFsp = $realSurfReboiseeFsp;
+		public function setRealSurfBoiseeFsp($realSurfBoiseeFsp){
+			$this->realSurfBoiseeFsp = $realSurfBoiseeFsp;
 		}
 
 		public function getLibelleAutreIndic(){
@@ -608,7 +628,7 @@
 			$nb = 0;
 			foreach ($this->getGroupeTravails() as $gt)
 			{
-				foreach ($gt as $inter)
+				foreach ($gt->getInterventions() as $inter)
 				{
 					$nb += $inter->getNbPrevHommeJourApte();
 				}
@@ -621,7 +641,7 @@
 			$nb = 0;
 			foreach ($this->getGroupeTravails() as $gt)
 			{
-				foreach ($gt as $inter)
+				foreach ($gt->getInterventions() as $inter)
 				{
 					$nb += $inter->getNbReelHommeJourApte();
 				}

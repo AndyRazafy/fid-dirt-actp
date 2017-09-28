@@ -21,8 +21,8 @@
 					"nom" => $terroir->getNom(),
 					"dir_id" => $terroir->getDir()->getId(),
 					"district_id" => $terroir->getDistrict()->getId(),
-					"nbbenef" => $terroir->getNbBenef(),
-					"nbinapte" => $terroir->getNbInapte(),
+					//"nbbenef" => $terroir->getNbBenef(),
+					//"nbinapte" => $terroir->getNbInapte(),
 					"nbsa" => $terroir->getNbsa(),
 					
 					"dpengplan" => $terroir->getDpEngPlan(),

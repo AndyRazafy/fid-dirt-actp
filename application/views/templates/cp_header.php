@@ -58,12 +58,12 @@
                             </li>
                             <li class="submenu">
                                 <a href="#">
-                                    <i class="glyphicon glyphicon-search"></i> Etats
+                                    <i class="glyphicon glyphicon-th-list"></i> Etats
                                     <span class="caret pull-right"></span>
                                 </a>
                                  <!-- Sub menu -->
                                 <ul>
-                                    <li><a href="<?php echo site_url('Intervention_Controller/etatPhase'); ?>">phase interventions</a></li>
+                                    <li><a href="<?php echo site_url('Intervention_Controller/etatPhase'); ?>">phase</a></li>
                                     <li><a href="<?php echo site_url('Intervention_Controller/etatPaiement?page=1'); ?>">paiements</a></li>
                                 </ul>
                             </li>

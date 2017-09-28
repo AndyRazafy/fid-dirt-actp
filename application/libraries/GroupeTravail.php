@@ -62,9 +62,9 @@
 			$this->interventions = $interventions;
 		}
 
-		public function getPhase($interventions)
+		public function getPhase()
 		{
-			$temp = end($interventions);
+			$temp = end($this->interventions);
 			$result = "";
 
 			if($temp != null)

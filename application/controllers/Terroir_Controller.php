@@ -27,8 +27,8 @@
 					$nom = $this->input->post("nom");
 					$dir_id = $this->input->post("dir");
 					$district_id = $this->input->post("district");
-					$nbBenef = $this->input->post("nbBenef");
-					$nbInapte = $this->input->post("nbInapte");
+					//$nbBenef = $this->input->post("nbBenef");
+					//$nbInapte = $this->input->post("nbInapte");
 					$nbsa = $this->input->post("nbsa");
 					
 					$dpEngPlan = $this->input->post("dpEngPlan");
@@ -60,10 +60,10 @@
 					$codemarchePaie = $this->input->post("codemarchePaie");
 					$montantReelPaie = $this->input->post("montantReelPaie");
 
-					$prevSurfTraiteeCes = $this->input->post("prevSurfTraiteeCes");
-					$realSurfTraiteeCes = $this->input->post("realSurfTraiteeCes");
-					$prevSurfReboiseeFsp = $this->input->post("prevSurfReboiseeFsp");
-					$realSurfReboiseeFsp = $this->input->post("realSurfReboiseeFsp");
+					//$prevSurfTraiteeCes = $this->input->post("prevSurfTraiteeCes");
+					//$realSurfTraiteeCes = $this->input->post("realSurfTraiteeCes");
+					//$prevSurfReboiseeFsp = $this->input->post("prevSurfReboiseeFsp");
+					//$realSurfReboiseeFsp = $this->input->post("realSurfReboiseeFsp");
 
 					$libelleAutreIndic = $this->input->post("libelleAutreIndic");
 					$prevAutreIndic = $this->input->post("prevAutreIndic");
@@ -142,8 +142,8 @@
 					else
 						$terroir->setCp(new ChargeProjet());
 					
-					$terroir->setNbBenef($nbBenef);
-					$terroir->setNbInapte($nbInapte);
+					//$terroir->setNbBenef($nbBenef);
+					//$terroir->setNbInapte($nbInapte);
 					$terroir->setNbsa($nbsa);
 					
 					$terroir->setDpEngPlan($dpEngPlan);
@@ -173,10 +173,10 @@
 					$terroir->setCodemarchePaie($codemarchePaie);
 					$terroir->setMontantReelPaie($montantReelPaie);
 					
-					$terroir->setPrevSurfTraiteeCes($prevSurfTraiteeCes);
-					$terroir->setRealSurfTraiteeCes($realSurfTraiteeCes);
-					$terroir->setPrevSurfReboiseeFsp($prevSurfReboiseeFsp);
-					$terroir->setRealSurfReboiseeFsp($realSurfReboiseeFsp);
+					//$terroir->setPrevSurfTraiteeCes($prevSurfTraiteeCes);
+					//$terroir->setRealSurfTraiteeCes($realSurfTraiteeCes);
+					//$terroir->setPrevSurfReboiseeFsp($prevSurfReboiseeFsp);
+					//$terroir->setRealSurfReboiseeFsp($realSurfReboiseeFsp);
 
 					$terroir->setLibelleAutreIndic($libelleAutreIndic);
 					$terroir->setPrevAutreIndic($prevAutreIndic);
