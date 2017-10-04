@@ -44,7 +44,7 @@
                     <div class="sidebar content-box" style="display: block;">
                         <ul class="nav">
                             <!-- Main menu -->
-                            <li><a href="<?php echo site_url('ChargeProjet_Controller'); ?>"><i class="glyphicon glyphicon-home"></i> Tableau de bord</a></li>
+                            <li><a href="<?php echo site_url('ChargeProjet_Controller/dashboard'); ?>"><i class="glyphicon glyphicon-home"></i> Tableau de bord</a></li>
                             <li class="submenu">
                                 <a href="#">
                                     <i class="glyphicon glyphicon-search"></i> Recherche

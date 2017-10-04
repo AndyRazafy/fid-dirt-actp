@@ -71,11 +71,12 @@
 				$this->session->set_userdata('user_id', $result[0]->getId());
 				$this->session->set_userdata('nom', $result[0]->getNom());
 				$this->session->set_userdata('prenom', $result[0]->getPrenom());
+				$this->session->set_userdata('pseudo', $result[0]->getPseudo());
 				$this->session->set_userdata('dateNaissance', $result[0]->getDateNaissance());
 				$this->session->set_userdata('email', $result[0]->getEmail());
 
 				//echo $_SESSION["prenom"];
-				redirect("ChargeProjet_Controller");
+				redirect("ChargeProjet_Controller/dashboard");
 			}
 			else
 			{

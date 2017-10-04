@@ -13,13 +13,13 @@
 			try
 			{
 				$data = array(
-					"id" => $paiement->getId(),
 					"dateprevue" => $paiement->getDatePrevue(),
 					"datereelle" => $paiement->getDateReelle(),
-					"intervention_id" => $paiement->getGroupeTravail()->getId()
+					"rang" => $paiement->getRang(),
+					"intervention_id" => $paiement->getIntervention()->getId()
 				);
 
-				$this->db->insert('intervention', $data);
+				$this->db->insert('paiement', $data);
 			}
 			catch(Exception $e)
 			{
@@ -34,11 +34,12 @@
 				$data = array(
 					"dateprevue" => $paiement->getDatePrevue(),
 					"datereelle" => $paiement->getDateReelle(),
-					"intervention_id" => $paiement->getGroupeTravail()->getId()
+					"rang" => $paiement->getRang(),
+					"intervention_id" => $paiement->getIntervention()->getId()
 				);
 
 				$this->db->where(array('id' => $paiement->getId()));
-				$this->db->update('intervention', $data);
+				$this->db->update('paiement', $data);
 			}
 			catch(Exception $e)
 			{
@@ -46,8 +47,17 @@
 			}
 		}
 
-		public function delete()
+		public function delete($paiement)
 		{
+			try
+			{
+				$this->db->where(array('id' => $paiement->getId()));
+				$this->db->delete('paiement');
+			}
+			catch(Exception $e)
+			{
+				throw $e;
+			}
 		}
 
 		public function findById($id)
@@ -114,7 +124,7 @@
 					for($i = 0;$i < $len;$i++)
 					{
 						$sql .= " JOIN ";
-						for($j = 0;$j < $row;$j++)
+						for($j = 0;$j < $rows;$j++)
 						{
 							$sql .= " ".$joins[$j][$i];
 						}

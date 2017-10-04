@@ -6,6 +6,7 @@
 		private $datePrevue;
 		private $dateReelle;
 		private $intervention;
+		private $rang;
 
 		public static function init($data)
 		{
@@ -19,9 +20,10 @@
 				$paiement->setId($row->id);
 				$paiement->setDatePrevue($row->dateprevue);
 				$paiement->setDateReelle($row->datereelle);
+				$paiement->setRang($row->rang);
 
-				$gt = $CI->Intervention_Model->findById($row->intervention_id);
-				$paiement->setIntervention($gt);
+				$intervention = $CI->Intervention_Model->findById($row->intervention_id);
+				$paiement->setIntervention($intervention);
 				
 				array_push($array, $paiement);
 			}
@@ -57,5 +59,13 @@
 
 		public function setIntervention($intervention){
 			$this->intervention = $intervention;
+		}
+
+		public function getRang(){
+			return $this->rang;
+		}
+
+		public function setRang($rang){
+			$this->rang = $rang;
 		}
 	}

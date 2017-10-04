@@ -3,13 +3,13 @@
 	  			<div class="content-box-large">
   					<div class="panel-heading">
 						<div class="panel-title">
-							<h4>
+							<h2>
 								Recherche UTB
-							</h4>
+							</h2>
 						</div>	
 					</div>
 
-					<hr>
+					<hr style="margin: 0;"/>
 
 					<div class="panel-body">
 		  				<form action="<?php echo site_url('Terroir_Controller/recherche'); ?>" method="GET" class="form-inline" role="form">

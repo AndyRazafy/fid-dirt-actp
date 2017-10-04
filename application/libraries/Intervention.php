@@ -84,12 +84,12 @@
 				$intervention->setRealAutreIndic($row->realautreindic);
 				$intervention->setObservationIndic($row->observationindic);
 
-				$intervention->setDPrevPaiement1($row->dppaiement1);
-				$intervention->setDPrevPaiement2($row->dppaiement2);
-				$intervention->setDPrevPaiement3($row->dppaiement3);
-				$intervention->setDReelPaiement1($row->drpaiement1);
-				$intervention->setDReelPaiement2($row->drpaiement2);
-				$intervention->setDReelPaiement3($row->drpaiement3);
+				// $intervention->setDPrevPaiement1($row->dppaiement1);
+				// $intervention->setDPrevPaiement2($row->dppaiement2);
+				// $intervention->setDPrevPaiement3($row->dppaiement3);
+				// $intervention->setDReelPaiement1($row->drpaiement1);
+				// $intervention->setDReelPaiement2($row->drpaiement2);
+				// $intervention->setDReelPaiement3($row->drpaiement3);
 
 				$intervention->setRang($row->rang);
 
@@ -410,6 +410,10 @@
 					return $interval->format("dans ".$interval->days." jour(s)");
 				else
 					return $interval->format("dans %m mois(s)");
+			}
+			else if($datetime1 == $datetime2)
+			{
+				return "aujourd'hui";
 			}
 			else
 			{

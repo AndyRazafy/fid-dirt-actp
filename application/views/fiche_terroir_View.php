@@ -36,7 +36,7 @@
 											<input class="form-control" type="hidden" name="prestataireAgec" value="<?php echo $terroir->getPrestataireAgec()->getId(); ?>">
 											<input class="form-control" type="hidden" name="cp" value="<?php echo $terroir->getCp()->getId(); ?>">
 											<div class="form-group">
-												<label>* nombre de sous activite (SA)</label>
+												<label>* nombre de sous activitees (SA)</label>
 												<input class="form-control" type="number" name="nbsa" value="<?php echo $terroir->getNbsa(); ?>" min="0" required>
 											</div>
 											<!-- <div class="form-group">

@@ -45,29 +45,41 @@
 									<th>#</th>
 									<th>GT</th>
 									<th>intervention</th>
-									<th>date prevue paiement 1</th>
-									<th>jour(s) restant(s)</th>
-									<th>date prevue paiement 2</th>
-									<th>jour(s) restant(s)</th>
-									<th>date prevue paiement 3</th>
+									<th>paiement</th>
+									<th>date prevue paiement</th>
 									<th>jour(s) restant(s)</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
+									// $i = $debut;
+									// foreach ($interventions as $row)
+									// {
+									// 	echo "<tr>";
+									// 	echo "<td>".$i."</td>";
+									// 	echo "<td><a href='".site_url("GroupeTravail_Controller/fiche/".$row->getGroupeTravail()->getId())."'>".$row->getGroupeTravail()->getNom()."</a></td>";
+									// 	echo "<td>ACTP".$row->getRang()."</td>";
+									// 	echo "<td>".($row->getDPrevPaiement1() ? date("d/m/Y", strtotime($row->getDPrevPaiement1())) : '-')."</td>";
+									// 	echo "<td>".$row->dateDifference($row->getDPrevPaiement1(), date("Y-m-d"), "dans %d jour(s)")."</td>";
+									// 	echo "<td>".($row->getDPrevPaiement2() ? date("d/m/Y", strtotime($row->getDPrevPaiement2())) : '-')."</td>";
+									// 	echo "<td>".$row->dateDifference($row->getDPrevPaiement2(), date("Y-m-d"), "dans %d jour(s)")."</td>";
+									// 	echo "<td>".($row->getDPrevPaiement3() ? date("d/m/Y", strtotime($row->getDPrevPaiement3())) : '-')."</td>";
+									// 	echo "<td>".$row->dateDifference($row->getDPrevPaiement3(), date("Y-m-d"), "dans %d jour(s)")."</td>";
+									// 	echo "</tr>";
+									// 	$i++;
+									// }
+
 									$i = $debut;
-									foreach ($interventions as $row)
+									$paiement_rang = 1;
+									foreach ($paiements as $row)
 									{
 										echo "<tr>";
 										echo "<td>".$i."</td>";
-										echo "<td><a href='".site_url("GroupeTravail_Controller/fiche/".$row->getGroupeTravail()->getId())."'>".$row->getGroupeTravail()->getNom()."</a></td>";
-										echo "<td>ACTP".$row->getRang()."</td>";
-										echo "<td>".($row->getDPrevPaiement1() ? date("d/m/Y", strtotime($row->getDPrevPaiement1())) : '-')."</td>";
-										echo "<td>".$row->dateDifference($row->getDPrevPaiement1(), date("Y-m-d"), "dans %d jour(s)")."</td>";
-										echo "<td>".($row->getDPrevPaiement2() ? date("d/m/Y", strtotime($row->getDPrevPaiement2())) : '-')."</td>";
-										echo "<td>".$row->dateDifference($row->getDPrevPaiement2(), date("Y-m-d"), "dans %d jour(s)")."</td>";
-										echo "<td>".($row->getDPrevPaiement3() ? date("d/m/Y", strtotime($row->getDPrevPaiement3())) : '-')."</td>";
-										echo "<td>".$row->dateDifference($row->getDPrevPaiement3(), date("Y-m-d"), "dans %d jour(s)")."</td>";
+										echo "<td><a href='".site_url("GroupeTravail_Controller/fiche/".$row->getIntervention()->getGroupeTravail()->getId())."'>".$row->getIntervention()->getGroupeTravail()->getNom()."</a></td>";
+										echo "<td>ACTP".$row->getIntervention()->getRang()."</td>";
+										echo "<td>PAIEMENT ".$row->getRang()."</td>";
+										echo "<td>".($row->getDatePrevue() ? date("d/m/Y", strtotime($row->getDatePrevue())) : '-')."</td>";
+										echo "<td>".$row->getIntervention()->dateDifference($row->getDatePrevue(), date("Y-m-d"), "dans %d jour(s)")."</td>";
 										echo "</tr>";
 										$i++;
 									}

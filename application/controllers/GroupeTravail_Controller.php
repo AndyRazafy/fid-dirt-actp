@@ -116,30 +116,30 @@
 					$row->setIntitules($result);
 				}
 
-				// $this->load->model("Paiement_Model");
-				// foreach ($interventions as $row)
-				// {
-				// 	$key = array();
-				// 	$operand = array();
-				// 	$value = array();
+				$this->load->model("Paiement_Model");
+				foreach ($interventions as $row)
+				{
+					$key = array();
+					$operand = array();
+					$value = array();
 
-				// 	array_push($key, "intervention_id");
-				// 	array_push($operand, "=");
-				// 	array_push($value, $row->getId());
+					array_push($key, "intervention_id");
+					array_push($operand, "=");
+					array_push($value, $row->getId());
 
-				// 	$columns = array("*");
-				// 	$conditions = array(
-				// 		0 => $key,
-				// 		1 => $operand,
-				// 		2 => $value
-				// 	);
-				// 	$joins = array();
-				// 	$orderby = "id";
-				// 	$tableName = "paiement";
+					$columns = array("*");
+					$conditions = array(
+						0 => $key,
+						1 => $operand,
+						2 => $value
+					);
+					$joins = array();
+					$orderby = "id";
+					$tableName = "paiement";
 
-				// 	$paiements = $this->Paiement_Model->find($columns, $conditions, $joins, $orderby, $tableName);
-				// 	$row->setPaiements($paiements);
-				// }
+					$paiements = $this->Paiement_Model->find($columns, $conditions, $joins, $orderby, $tableName);
+					$row->setPaiements($paiements);
+				}
 
 				// $nbPaiement = sizeof($interventions[0]->getPaiements());
 

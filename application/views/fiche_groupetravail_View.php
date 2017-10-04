@@ -35,7 +35,7 @@
 			  					</div>
 			  				</div>
 			  				
-			  				<div class="col-lg-6" style="border-left: solid 3px #999;">
+			  				<div class="col-lg-4" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php echo $groupetravail->getTerroir()->getPrestataireAgec()->getNom(); ?>
@@ -63,6 +63,17 @@
 			  							?>
 			  						</h5>
 			  						<span class="text-muted text-size-small" >PHASE</span>
+			  					</div>
+			  				</div>
+
+			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
+			  					<div class="content-group">
+			  						<h5 class="text-semibold no-margin" style="margin: 0;">
+			  							<?php 
+			  								echo $groupetravail->getTerroir()->getNbPaiement();
+			  							?>
+			  						</h5>
+			  						<span class="text-muted text-size-small" >NB PAIEMENTS</span>
 			  					</div>
 			  				</div>
 	                    </div>
@@ -242,25 +253,24 @@
 							            <table class="table table-striped table-bordered table_vide">	
 							            	<thead>
 								                <tr>
-								                	<th class="text-center">Date prévue paiement 1</th>
-													<th class="text-center">Date réelle paiement 1</th>
-													<th class="text-center">Date prévue paiement 2</th>
-													<th class="text-center">Date réelle paiement 2</th>
-													<th class="text-center">Date prévue paiement 3</th>
-													<th class="text-center">Date réelle paiement 3</th>
-												</tr>
-							              	</thead>
-							              	<tbody>
+										            <?php 
+										            	$i = 1;
+										            	foreach ($row->getPaiements() as $p) { ?>
+										            		<th class="text-center">Date prévue paiement <?php echo $i; ?></th>
+										            		<th class="text-center">Date reelle paiement <?php echo $i; ?></th>
+										            <?php $i++; } ?>
+										        </tr>
+										    </thead>
+										    <tbody>
 							                	<tr>
-													<td class="text-center"><?php echo ($row->getDPrevPaiement1() ? date("d-m-Y", strtotime($row->getDPrevPaiement1())) : '-'); ?></td>
-													<td class="text-center"><?php echo ($row->getDReelPaiement1() ? date("d-m-Y", strtotime($row->getDReelPaiement1())) : '-'); ?></td>
-													<td class="text-center"><?php echo ($row->getDPrevPaiement2() ? date("d-m-Y", strtotime($row->getDPrevPaiement2())) : '-'); ?></td>
-													<td class="text-center"><?php echo ($row->getDReelPaiement2() ? date("d-m-Y", strtotime($row->getDReelPaiement2())) : '-'); ?></td>
-													<td class="text-center"><?php echo ($row->getDPrevPaiement3() ? date("d-m-Y", strtotime($row->getDPrevPaiement3())) : '-'); ?></td>
-													<td class="text-center"><?php echo ($row->getDReelPaiement3() ? date("d-m-Y", strtotime($row->getDReelPaiement3())) : '-'); ?></td>
+							                		<?php 
+										            	foreach ($row->getPaiements() as $p) { ?>
+										            		<td class="text-center"><?php echo ($p->getDatePrevue() ? date("d-m-Y", strtotime($p->getDatePrevue())) : '-'); ?></td>
+										            		<td class="text-center"><?php echo ($p->getDateReelle() ? date("d-m-Y", strtotime($p->getDateReelle())) : '-'); ?></td>
+									            	<?php } ?>
 							                	</tr>
-							              	</tbody>
-							            </table>
+							                </tbody>
+										</table>
 							        </div>
 								</div>
 							</div>
@@ -313,31 +323,22 @@
 													<label>date reel debut travaux</label>
 													<input class="form-control" type="date" name="dReelDebut" value="<?php echo $row->getDReelDebut(); ?>">
 												</div>
-												<hr>
+												<hr />
 												<div class="form-group">
-													<label>date prevue paiement 1</label>
-													<input class="form-control" type="date" name="dPrevPaiement1" value="<?php echo $row->getDPrevPaiement1(); ?>">
-												</div>
-												<div class="form-group">
-													<label>date reelle paiement 1</label>
-													<input class="form-control" type="date" name="dReelPaiement1" value="<?php echo $row->getDReelPaiement1(); ?>">
-												</div>
-												<div class="form-group">
-													<label>date prevue paiement 2</label>
-													<input class="form-control" type="date" name="dPrevPaiement2" value="<?php echo $row->getDPrevPaiement2(); ?>">
-												</div>
-												<div class="form-group">
-													<label>date reelle paiement 2</label>
-													<input class="form-control" type="date" name="dReelPaiement2" value="<?php echo $row->getDReelPaiement2(); ?>">
-												</div>
-												<div class="form-group">
-													<label>date prevue paiement 3</label>
-													<input class="form-control" type="date" name="dPrevPaiement3" value="<?php echo $row->getDPrevPaiement3(); ?>">
-												</div>
-												<div class="form-group">
-													<label>date reelle paiement 3</label>
-													<input class="form-control" type="date" name="dReelPaiement3" value="<?php echo $row->getDReelPaiement3(); ?>">
-												</div>
+													<?php 
+										            	$i = 0;
+										            	foreach ($row->getPaiements() as $p) { ?>
+										            		<div class="form-group">
+										            			<input class="form-control" type="hidden" name="paiements[<?php echo $i; ?>][id][]" value="<?php echo $p->getId(); ?>">
+																<label>date prevue paiement <?php echo $i +1; ?></label>
+																<input class="form-control" type="date" name="paiements[<?php echo $i; ?>][prev][]" value="<?php echo $p->getDatePrevue(); ?>">
+															</div>
+															<div class="form-group">
+																<label>date reelle paiement <?php echo $i +1; ?></label>
+																<input class="form-control" type="date" name="paiements[<?php echo $i; ?>][reel][]" value="<?php echo $p->getDateReelle(); ?>">
+															</div>
+										            <?php $i++; } ?>
+										        </div>
 												<hr>
 												<div class="form-group">
 													<label>date prevue RTX</label>
@@ -479,7 +480,7 @@
 						                <h4 class="modal-title">Modification</h4>
 						            </div>
 						            <div class="modal-body">
-						            	<p>Voulez-vous vraiment modifier?</p>
+						            	<h3>Voulez-vous vraiment modifier?</h3>
 						            </div>
 						            <div class="modal-footer">
 						                <a href="#" class="btn btn-success" onclick="javascript:validation();" data-dismiss="">Valider</a>
@@ -568,7 +569,7 @@
 				}
     			else
     			{
-    				$("#infoModal p").text("Vouz n'avez aucun droit sur ce groupe de travail.");
+    				$("#infoModal h3").text("Vouz n'avez aucun droit sur ce groupe de travail.");
 	    			$('#infoModal').modal('show');
     			}	
 	    	}
@@ -582,7 +583,7 @@
 	    		}
 	    		else
 	    		{
-	    			$("#infoModal p").text("Veuillez remplir les champs *.");
+	    			$("#infoModal h3").text("Veuillez remplir les champs *.");
 	    			$('#infoModal').modal('show');
 	    		}
 	    	}
@@ -601,7 +602,7 @@
 	    		}
 	    		else
 	    		{
-	    			$("#infoModal p").text("Veuillez remplir les champs *.");
+	    			$("#infoModal h3").text("Veuillez remplir les champs *.");
 	    			$('#infoModal').modal('show');
 	    		}
 	    	}

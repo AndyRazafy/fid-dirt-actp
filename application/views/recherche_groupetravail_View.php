@@ -3,9 +3,9 @@
 	  			<div class="content-box-large">
   					<div class="panel-heading">
 						<div class="panel-title">
-							<h4>
+							<h2>
 								Recherche GT
-							</h4>
+							</h2>
 						</div>	
 					</div>
 
