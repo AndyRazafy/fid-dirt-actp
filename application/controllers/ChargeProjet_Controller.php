@@ -10,14 +10,17 @@
 	 
 		public function index()
 		{	
-			$data["contents"] = "cp_dashboard_View";
-		   	$this->load->view('cp_template', $data);
+			
 		}
 
 		public function dashboard()
 		{
+			$this->load->model("Terroir_Model");
+			$this->load->model("GroupeTravail_Model");
+			$this->load->model("Paiement_Model");
+
 			$session = $this->session->userdata;
-			$user_id = $session["user_id"];
+			$userId = $session["user_id"];
 			$template = $session["template"];
 
 			$key = array();
@@ -26,7 +29,7 @@
 
 			array_push($key, "cp_id");
 			array_push($operand, "=");
-			array_push($value, $user_id);
+			array_push($value, $userId);
 
 			$columns = array("*");
 			$conditions = array(
@@ -38,10 +41,9 @@
 			$orderby = "";
 			$tableName = "terroir";
 
-			$this->load->model("Terroir_Model");
 			$terroirs = $this->Terroir_Model->find($columns, $conditions, $joins, $orderby, $tableName);
 
-			$count = 0;
+			$gts = array();
 
 			foreach ($terroirs as $row)
 			{
@@ -63,14 +65,45 @@
 				$orderby = "";
 				$tableName = "groupetravail";
 
-				$this->load->model("GroupeTravail_Model");
 				$groupetravails = $this->GroupeTravail_Model->find($columns, $conditions, $joins, $orderby, $tableName);
 				$row->setGroupeTravails($groupetravails);
 
-				$count += sizeof($row->getGroupeTravails());
+				$gts = array_merge($gts, $groupetravails);
 			}
 
-			$data["nbGt"] = $count;
+			$key = array();
+			$operand = array();
+			$value = array();
+
+			array_push($key, "t.cp_id");
+			array_push($operand, "=");
+			array_push($value, $userId);
+
+			array_push($key, "datereelle is null");
+			array_push($operand, "");
+			array_push($value, "");
+
+			$columns = array("p.*");
+			$conditions = array(
+				0 => $key,
+				1 => $operand,
+				2 => $value
+			);
+
+			$joinskey = array("intervention i", "groupetravail gt", "terroir t");
+			$joinsrelation = array("ON p.intervention_id = i.id", "ON gt.id = i.groupetravail_id", "ON t.id = gt.terroir_id");
+
+			$orderby = "";
+			$joins = array(
+				0 => $joinskey,
+				1 => $joinsrelation
+			);
+			$tableName = "paiement p";
+
+			$paiements = $this->Paiement_Model->find($columns, $conditions, $joins, $orderby, $tableName);
+
+			$data["paiements"] = $paiements;
+			$data["groupeTravails"] = $gts;
 			$data["terroirs"] = $terroirs;
 			$data["contents"] = "cp_dashboard_View";
 			$this->load->view($template, $data);

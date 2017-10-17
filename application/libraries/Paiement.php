@@ -68,4 +68,31 @@
 		public function setRang($rang){
 			$this->rang = $rang;
 		}
+
+		public function dateDifference($date_1, $date_2, $diff_format = "%a")
+		{
+			$datetime1 = date_create($date_1);
+			$datetime2 = date_create($date_2);
+
+			$interval = date_diff($datetime1, $datetime2);
+
+			if($datetime1 > $datetime2)
+			{
+				//if($interval->days >= 0 && $interval->days <= 30)
+					return $interval->format("j- ".$interval->days);
+				// else
+				// 	return $interval->format("dans %m mois(s)");
+			}
+			else if($datetime1 == $datetime2)
+			{
+				return "aujourd'hui";
+			}
+			else
+			{
+				//if($interval->days >= 0 && $interval->days <= 30)
+					return $interval->format("j+ ".$interval->days);
+				// else
+				// 	return $interval->format("il y a %m moi(s)");
+			}			
+		}
 	}

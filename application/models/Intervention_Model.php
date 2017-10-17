@@ -23,13 +23,6 @@
 					"dprtx" => $intervention->getDPrevRTX(),
 					"drrtx" => $intervention->getDReelRTX(),
 
-					// "dppaiement1" => $intervention->getDPrevPaiement1(),
-					// "drpaiement1" => $intervention->getDReelPaiement1(),
-					// "dppaiement2" => $intervention->getDPrevPaiement2(),
-					// "drpaiement2" => $intervention->getDReelPaiement2(),
-					// "dppaiement3" => $intervention->getDPrevPaiement3(),
-					// "drpaiement3" => $intervention->getDReelPaiement3(),
-
 					"nbpbenef" => $intervention->getNbPrevBenef(),
 					"nbrbenef" => $intervention->getNbReelBenef(),
 					"nbrbenefapte" => $intervention->getNbReelBenefApte(),
@@ -52,7 +45,15 @@
 					"rang" => $intervention->getRang()
 				);
 
-				$this->db->insert('intervention', $data);
+				if($this->db->insert('intervention', $data))
+				{
+					return true;
+				}
+				else
+				{
+					throw new Exception("Impossible de supprimer cette intervention.");
+				}
+
 			}
 			catch(Exception $e)
 			{
@@ -74,13 +75,6 @@
 					"dprtx" => $intervention->getDPrevRTX(),
 					"drrtx" => $intervention->getDReelRTX(),
 
-					// "dppaiement1" => $intervention->getDPrevPaiement1(),
-					// "drpaiement1" => $intervention->getDReelPaiement1(),
-					// "dppaiement2" => $intervention->getDPrevPaiement2(),
-					// "drpaiement2" => $intervention->getDReelPaiement2(),
-					// "dppaiement3" => $intervention->getDPrevPaiement3(),
-					// "drpaiement3" => $intervention->getDReelPaiement3(),
-
 					"nbpbenef" => $intervention->getNbPrevBenef(),
 					"nbrbenef" => $intervention->getNbReelBenef(),
 					"nbrbenefapte" => $intervention->getNbReelBenefApte(),
@@ -104,7 +98,14 @@
 				);
 
 				$this->db->where(array('id' => $intervention->getId()));
-				$this->db->update('intervention', $data);
+				if($this->db->update('intervention', $data))
+				{
+					return true;
+				}
+				else
+				{
+					throw new Exception("Modification interrompu.");
+				}
 			}
 			catch(Exception $e)
 			{
@@ -117,7 +118,14 @@
 			try
 			{
 				$this->db->where(array('id' => $intervention->getId()));
-				$this->db->delete('intervention');
+				if($this->db->delete('intervention'))
+				{
+					return true;
+				}
+				else
+				{
+					throw new Exception("Impossible de supprimer cette intervention.");
+				}
 			}
 			catch(Exception $e)
 			{

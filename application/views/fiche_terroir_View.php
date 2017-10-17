@@ -1,9 +1,9 @@
 		<div class="col-md-10">
 	  		<div class="row">
-	  			<?php
-		            echo $this->session->flashdata('info');
-		        ?>
 	  			<div class="content-box-large">
+	  				<?php
+			            echo $this->session->flashdata('info');
+			        ?>
   					<div class="panel-heading">
 						<div class="col-xs-12 panel-title text-center col-centered">
 							<h4>
@@ -12,11 +12,11 @@
 							<span class="text-muted text-size-small" ><?php echo $terroir->getDistrict()->getNom()." - ".$terroir->getDir()->getNom(); ?></span>
 						</div>	
 						<div class="panel-options">
+							<a href="<?php echo site_url('Terroir_Controller/exportToExcel/'.$terroir->getId()); ?>"><button type="button" class="btn btn-success"><i class="glyphicon glyphicon-export"></i> Exporter BDD</button></a>
+							<button type="button" class="btn btn-default" onclick="javascript:etatPhase();"><i class="glyphicon glyphicon-list"></i> Etat phases</button>
 							<button type="button" class="btn btn-primary" onclick="javascript:modifierUtb();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 			            </div>
 					</div>
-
-					<hr>
 
 					<div class="panel-body">
 						<form action="<?php echo site_url('Terroir_Controller/update'); ?>" method="POST" id="form">
@@ -34,19 +34,28 @@
 											<input class="form-control" type="hidden" name="dir" value="<?php echo $terroir->getDir()->getId(); ?>">
 											<input class="form-control" type="hidden" name="district" value="<?php echo $terroir->getDistrict()->getId(); ?>">
 											<input class="form-control" type="hidden" name="prestataireAgec" value="<?php echo $terroir->getPrestataireAgec()->getId(); ?>">
-											<input class="form-control" type="hidden" name="cp" value="<?php echo $terroir->getCp()->getId(); ?>">
+											
 											<div class="form-group">
 												<label>* nombre de sous activitees (SA)</label>
 												<input class="form-control" type="number" name="nbsa" value="<?php echo $terroir->getNbsa(); ?>" min="0" required>
 											</div>
-											<!-- <div class="form-group">
-												<label>* nombre de beneficiaire</label>
-												<input class="form-control" type="number" name="nbBenef" value="<?php echo $terroir->getNbBenef(); ?>" min="0" required>
-											</div>
-											<div class="form-group">
-												<label>* nombre inapte</label>
-												<input class="form-control" type="number" name="nbInapte" value="<?php echo $terroir->getNbInapte(); ?>" min="0" required>
-											</div> -->
+
+											<?php 
+												if($_SESSION["type"] == "admin") { ?>
+													<div class="form-group">
+														<label>Charge de projet (CP)</label>
+														<select class="form-control" name="cp">
+															<option value="<?php echo $terroir->getCp()->getId(); ?>"><?php echo $terroir->getCp()->getPseudo(); ?></option>
+															<?php foreach ($cps as $row) { 
+																if($row->getId() != $terroir->getCp()->getId()){ ?>
+																	<option value="<?php echo $row->getId(); ?>"><?php echo $row->getPseudo()." | ".$row->getPrenom(); ?></option>
+															<?php } } ?>
+														</select>
+													</div>
+											<?php } 
+												else { ?>
+													<input class="form-control" type="hidden" name="cp" value="<?php echo $terroir->getCp()->getId(); ?>">
+											<?php } ?>
 
 											<div class="modal-footer">
 		                                    	<button type="button" onClick="javascript:confirmation();" class="btn btn-primary">Modifier</button>
@@ -56,8 +65,50 @@
 	                            </div>
 	                        </div>
 
+	                        <div class="modal fade" id="etatPhaseModal" role="dialog">
+						        <div class="modal-dialog">
+								<!-- Modal content-->
+							        <div class="modal-content">
+							            <div class="modal-header">
+							                <h4 class="modal-title">Etat phase</h4>
+							            </div>
+							            <div class="modal-body">
+							            	<table class="table table-bordered table-hover">
+												<thead class="thead">
+													<tr>
+														<th></th>
+														<?php
+															for($rang = 1; $rang <= $max_rang;$rang++)
+															{
+																echo "<th>ACTP".$rang."</th>";
+															}
+														?>
+													</tr>
+												</thead>
+												<tbody>
+													<?php
+														foreach ($phases as $row)
+														{
+															echo "<tr><td>".$row->getValeur()."</td>";
+															for($rang = 1;$rang <= $max_rang;$rang++)
+															{
+																echo "<td>".sizeof($etat[$row->getValeur()][$rang])."</td>";
+															}
+															echo "</tr>";
+														}
+													?>
+												</tbody>
+											</table>
+							            </div>
+							            <div class="modal-footer">
+							                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+
 					  		<div class="col-lg-12">
-				  				<div class="col-lg-3" style="border-left: solid 2px #999;">
+				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
 				  							<a href="<?php echo site_url('GroupeTravail_Controller/recherche?page=1&terroir_nom='.$terroir->getNom().'&tri=codechantier'); ?>"><?php echo sizeof($terroir->getGroupeTravails()); ?></a>
@@ -66,7 +117,7 @@
 				  					</div>
 				  				</div>
 				  				
-				  				<div class="col-lg-3" style="border-left: solid 2px #999;">
+				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
 				  							<?php echo $terroir->getNbsa(); ?>
@@ -92,6 +143,15 @@
 				  						<span class="text-muted text-size-small" >INAPTES</span>
 				  					</div>
 				  				</div>
+
+				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
+				  					<div class="content-group">
+				  						<h4 class="text-semibold no-margin" style="margin: 0;">
+				  							<?php echo $terroir->getCp()->getPseudo(); ?>
+				  						</h4>
+				  						<span class="text-muted text-size-small" >CP</span>
+				  					</div>
+				  				</div>
 				  			</div>
 
 				  			<div class="col-lg-12" style="margin: 2% 0;">
@@ -104,7 +164,14 @@
 							            <div class="panel-title">
 								            Planification
 							        	</div>
-							          	<span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
+							        	<div class="col-lg-3" style="border-left: solid 2px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo $terroir->getNom(); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small">UTB</span>
+						  					</div>
+						  				</div>
 							            <div class="panel-options">
 							            	<button type="button" class="btn btn-primary" onclick="javascript:modifierPlanification();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 							            </div>
@@ -249,7 +316,14 @@
 							            <div class="panel-title">
 							            	Ciblage
 							            </div>
-							            <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
+							            <div class="col-lg-3" style="border-left: solid 2px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo $terroir->getNom(); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small">UTB</span>
+						  					</div>
+						  				</div>
 							            <div class="panel-options">
 							            	<button type="button" class="btn btn-primary" onclick="javascript:modifierCiblage();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 							            </div>
@@ -369,7 +443,14 @@
 							            <div class="panel-title">
 							            	AGEC
 							            </div>
-							            <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
+							            <div class="col-lg-3" style="border-left: solid 2px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo $terroir->getNom(); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small">UTB</span>
+						  					</div>
+						  				</div>
 							            <div class="panel-options">
 							            	<button type="button" class="btn btn-primary" onclick="javascript:modifierAgec();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 							            </div>
@@ -432,7 +513,7 @@
 	                                <!-- Modal content-->
 	                                <div class="modal-content">
 	                                    <div class="modal-header">
-	                                        <h4 class="modal-title">
+	                                         <h4 class="modal-title">
 	                                        	AGEC
 	                                        </h4>
 	                                        <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
@@ -491,8 +572,14 @@
 							            <div class="panel-title">
 							            	Paiement
 							            </div>
-							            <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
-							          
+							            <div class="col-lg-3" style="border-left: solid 2px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo $terroir->getNom(); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small">UTB</span>
+						  					</div>
+						  				</div>
 							            <div class="panel-options">
 							            	<button type="button"  class="btn btn-primary" onclick="javascript:modifierPaiement();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 							            </div>
@@ -572,7 +659,14 @@
 							            <div class="panel-title">
 							            	IOV
 							            </div>
-							            <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
+							            <div class="col-lg-3" style="border-left: solid 2px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo $terroir->getNom(); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small">UTB</span>
+						  					</div>
+						  				</div>
 							            <div class="panel-options">
 							            	<a href="<?php echo site_url('GroupeTravail_Controller/recherche?page=1&terroir_nom='.$terroir->getNom().'&tri=codechantier'); ?>"><button type="button" class="btn btn-default" > Voir</button></a>
 							            </div>
@@ -614,7 +708,14 @@
 							            <div class="panel-title">
 							            	Autres indicateurs
 							            </div>
-							            <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $terroir->getNom(); ?></a></span>
+							            <div class="col-lg-3" style="border-left: solid 2px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo $terroir->getNom(); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small">UTB</span>
+						  					</div>
+						  				</div>
 							          
 							            <div class="panel-options">
 							            	<button type="button" class="btn btn-primary" onClick="javascript:modifierAutreIndicateur();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
@@ -742,6 +843,11 @@
 	    		}
 	    	}
 
+	    	function etatPhase()
+	    	{
+    			$('#etatPhaseModal').modal('show');
+	    	}
+
 	    	function modifierPlanification()
 	    	{
 	    		if(droit() == 1)
@@ -785,17 +891,6 @@
 	    			$('#infoModal').modal('show');
 	    		}
 	    	}
-
-	    	// function modifierIov()
-	    	// {
-	    	// 	if(droit() == 1)
-	    	// 		$('#iovModal').modal('show');
-	    	// 	else
-	    	// 	{
-	    	// 		$("#infoModal h3").text("Vouz n'avez aucun droit sur cette UTB.");
-	    	// 		$('#infoModal').modal('show');
-	    	// 	}
-	    	// }
 
 	    	function modifierAutreIndicateur()
 	    	{

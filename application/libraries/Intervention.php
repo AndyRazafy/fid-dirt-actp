@@ -7,6 +7,7 @@
 		private $dureeTravaux;
 		private $dPrevDebut;
 		private $dReelDebut;
+		private $nbPaiement;
 
 		private $dPrevRTX;
 		private $dReelRTX;
@@ -62,6 +63,7 @@
 				$intervention->setDureeTravaux($row->dureetravaux);
 				$intervention->setDPrevDebut($row->dpdebut);
 				$intervention->setDReelDebut($row->drdebut);
+				$intervention->setNbPaiement($row->nbpaiement);
 				
 				$intervention->setDPrevRTX($row->dprtx);
 				$intervention->setDReelRTX($row->drrtx);
@@ -83,13 +85,6 @@
 				$intervention->setPrevAutreIndic($row->prevautreindic);
 				$intervention->setRealAutreIndic($row->realautreindic);
 				$intervention->setObservationIndic($row->observationindic);
-
-				// $intervention->setDPrevPaiement1($row->dppaiement1);
-				// $intervention->setDPrevPaiement2($row->dppaiement2);
-				// $intervention->setDPrevPaiement3($row->dppaiement3);
-				// $intervention->setDReelPaiement1($row->drpaiement1);
-				// $intervention->setDReelPaiement2($row->drpaiement2);
-				// $intervention->setDReelPaiement3($row->drpaiement3);
 
 				$intervention->setRang($row->rang);
 
@@ -397,38 +392,19 @@
 			$this->paiements = $paiements;
 		}
 
-		public function dateDifference($date_1, $date_2, $diff_format = "%a")
-		{
-			$datetime1 = date_create($date_1);
-			$datetime2 = date_create($date_2);
-
-			$interval = date_diff($datetime1, $datetime2);
-
-			if($datetime1 > $datetime2)
-			{
-				if($interval->days >= 0 && $interval->days <= 30)
-					return $interval->format("dans ".$interval->days." jour(s)");
-				else
-					return $interval->format("dans %m mois(s)");
-			}
-			else if($datetime1 == $datetime2)
-			{
-				return "aujourd'hui";
-			}
-			else
-			{
-				if($interval->days >= 0 && $interval->days <= 30)
-					return $interval->format("il y a ".$interval->days." jour(s)");
-				else
-					return $interval->format("il y a %m moi(s)");
-			}			
-		}
-
 		public function getIntitules(){
 			return $this->intitules;
 		}
 
 		public function setIntitules($intitules){
 			$this->intitules = $intitules;
+		}
+
+		public function getNbPaiement(){
+			return $this->nbPaiement;
+		}
+
+		public function setNbPaiement($nbPaiement){
+			$this->nbPaiement = $nbPaiement;
 		}
 	}

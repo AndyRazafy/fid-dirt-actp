@@ -1,16 +1,16 @@
-		<div class="col-md-10">
+		<div class="col-lg-10">
 	  		<div class="row">
 	  			<div class="content-box-large">
   					<div class="panel-heading">
-						<div class="panel-title">
-							<h2>
+						<div class="col-xs-12 panel-title">
+							<h3>
 								Recherche UTB
-							</h2>
+							</h3>
 						</div>	
+						<hr/>
 					</div>
 
 					<hr style="margin: 0;"/>
-
 					<div class="panel-body">
 		  				<form action="<?php echo site_url('Terroir_Controller/recherche'); ?>" method="GET" class="form-inline" role="form">
 							<input type="hidden" name="page" value="1">

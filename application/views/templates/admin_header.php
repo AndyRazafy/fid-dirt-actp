@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>FID - ACTP</title>
+        <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
         <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
@@ -19,12 +20,12 @@
         <div class="header">
              <div class="container">
                 <div class="row">
-                   <div class="col-md-5">
-                      <!-- Logo -->
-                      <div class="logo">
-                         <h1><a href="index.html">FID - ACTP</a></h1>
-                      </div>
-                   </div>
+                    <div class="col-md-5">
+                        <!-- Logo -->
+                        <a href="<?php echo site_url('Base_Controller'); ?>">
+                            <img style="max-width: 15%;" src="<?php echo base_url('assets/pictures/fid/logo/nav_logo.png'); ?>">
+                        </a>
+                    </div>
                    <div class="col-md-7">
                       <div class="navbar navbar-inverse" role="banner">
                           <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
@@ -49,17 +50,37 @@
                     <div class="sidebar content-box" style="display: block;">
                         <ul class="nav">
                             <!-- Main menu -->
-                            <li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Tableau de bord</a></li>
+                            <li><a href="<?php echo site_url('Administration_Controller/dashboard'); ?>"><i class="glyphicon glyphicon-home"></i> Tableau de bord</a></li>
                             <li class="submenu">
                                 <a href="#">
-                                    <i class="glyphicon glyphicon-list"></i> Recherche
+                                    <i class="glyphicon glyphicon-search"></i> Recherche
                                     <span class="caret pull-right"></span>
                                 </a>
                                  <!-- Sub menu -->
                                 <ul>
-                                    <li><a href="#">Terroir</a></li>
-                                    <li><a href="#">Groupe travail</a></li>
-                                    <li><a href="#">Intervention</a></li>
+                                    <li><a href="<?php echo site_url('Terroir_Controller/recherche?page=1'); ?>">UTB</a></li>
+                                    <li><a href="<?php echo site_url('GroupeTravail_Controller/recherche?page=1'); ?>">GT</a></li>
+                                    <li><a href="<?php echo site_url('Prestataire_Controller/recherche?page=1'); ?>">Prestataire</a></li>
+                                    <li><a href="<?php echo site_url('AgencePaiement_Controller/recherche?page=1'); ?>">Agence paiement</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">
+                                    <i class="glyphicon glyphicon-th-list"></i> Etats
+                                    <span class="caret pull-right"></span>
+                                </a>
+                                 <!-- Sub menu -->
+                                <ul>
+                                    <li><a href="<?php echo site_url('Paiement_Controller/etatPaiement?page=1'); ?>">paiements</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">
+                                    <i class=""></i> Exporter
+                                    <span class="caret pull-right"></span>
+                                </a>
+                                <ul>
+                                    <li><a href="<?php echo site_url('Intervention_Controller/exportToExcel'); ?>"><i class=""></i> <button type="button" class="btn btn-primary" >BDD Excel</button></a></li>
                                 </ul>
                             </li>
                         </ul>

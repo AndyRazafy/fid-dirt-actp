@@ -10,7 +10,14 @@
 	 
 		public function index()
 		{	
+			
+		}
+
+		public function dashboard()
+		{
+			$session = $this->session->userdata;
+			$template = $session["template"];
 			$data["contents"] = "admin_dashboard_View";
-		   	$this->load->view('admin_template', $data);
+			$this->load->view($template, $data);
 		}
 	}

@@ -15,14 +15,21 @@
 
 		public function update($groupeTravail)
 		{
-			$data = array(
-				"nom" => $groupeTravail->getNom(),
-				"codechantier" => $groupeTravail->getCodeChantier(),
-				"terroir_id" => $groupeTravail->getTerroir()->getId()
-			);
+			try
+			{	
+				$data = array(
+					"nom" => $groupeTravail->getNom(),
+					"codechantier" => $groupeTravail->getCodeChantier(),
+					"terroir_id" => $groupeTravail->getTerroir()->getId()
+				);
 
-			$this->db->where(array('id' => $groupeTravail->getId()));
-			$this->db->update('groupetravail', $data);
+				$this->db->where(array('id' => $groupeTravail->getId()));
+				$this->db->update('groupetravail', $data);
+			}
+			catch(Exception $e)
+			{
+				throw $e;
+			}
 		}
 
 		public function delete()

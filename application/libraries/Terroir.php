@@ -9,7 +9,6 @@
 		private $nbBenef;
 		private $nbInapte;
 		private $nbsa;
-		private $nbPaiement;
 		
 		private $dpEngPlan;
 		private $drEngPlan;
@@ -127,7 +126,6 @@
 				//$terroir->setNbBenef($row->nbbenef);
 				//$terroir->setNbInapte($row->nbinapte);
 				$terroir->setNbsa($row->nbsa);
-				$terroir->setNbPaiement($row->nbpaiement);
 				
 				$terroir->setDpEngPlan($row->dpengplan);
 				$terroir->setDrEngPlan($row->drengplan);
@@ -659,15 +657,5 @@
 		public function getGroupeTravails()
 		{
 			return $this->groupeTravails;
-		}
-
-		public function setNbPaiement($nbPaiement)
-		{
-			$this->nbPaiement = $nbPaiement;
-		}
-
-		public function getNbPaiement()
-		{
-			return $this->nbPaiement;
 		}
 	}

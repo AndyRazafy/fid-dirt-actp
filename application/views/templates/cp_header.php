@@ -14,7 +14,7 @@
         <div class="header">
             <div class="container">
                 <div class="row">
-                   <div class="col-md-5">
+                    <div class="col-md-5">
                         <!-- Logo -->
                         <a href="<?php echo site_url('Base_Controller'); ?>">
                             <img style="max-width: 15%;" src="<?php echo base_url('assets/pictures/fid/logo/nav_logo.png'); ?>">
@@ -52,8 +52,8 @@
                                 </a>
                                  <!-- Sub menu -->
                                 <ul>
-                                    <li><a href="<?php echo site_url('Terroir_Controller/recherche?page=1'); ?>">UTB</a></li>
-                                    <li><a href="<?php echo site_url('GroupeTravail_Controller/recherche?page=1'); ?>">GT</a></li>
+                                    <li><a href="<?php echo site_url('Terroir_Controller/recherche?page=1&cp_pseudo='.$_SESSION['pseudo']); ?>">UTB</a></li>
+                                    <li><a href="<?php echo site_url('GroupeTravail_Controller/recherche?page=1&cp_pseudo='.$_SESSION['pseudo']); ?>">GT</a></li>
                                 </ul>
                             </li>
                             <li class="submenu">
@@ -63,8 +63,16 @@
                                 </a>
                                  <!-- Sub menu -->
                                 <ul>
-                                    <li><a href="<?php echo site_url('Intervention_Controller/etatPhase'); ?>">phase</a></li>
-                                    <li><a href="<?php echo site_url('Intervention_Controller/etatPaiement?page=1'); ?>">paiements</a></li>
+                                    <li><a href="<?php echo site_url('Paiement_Controller/etatPaiement?page=1'); ?>">paiements</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">
+                                    <i class=""></i> Exporter
+                                    <span class="caret pull-right"></span>
+                                </a>
+                                <ul>
+                                    <li><a href="<?php echo site_url('Intervention_Controller/exportToExcel'); ?>"><i class=""></i> <button type="button" class="btn btn-primary" >BDD Excel</button></a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -13,40 +13,6 @@
 			
 		}
 
-		// public function create()
-		// {
-		// 	try
-		// 	{
-		// 		$this->load->model("Intervention_Model");
-		// 		$interventions = $this->Intervention_Model->findAll();
-
-		// 		foreach ($interventions as $row)
-		// 		{
-		// 			$this->load->model("GroupeTravail_Model");
-		// 			$groupeTravail = $this->GroupeTravail_Model->findById($row->getGroupeTravail()->getId());
-
-		// 			$this->load->model("Terroir_Model");
-		// 			$terroir = $this->Terroir_Model->findById($groupeTravail->getTerroir()->getId());
-
-		// 			$limite = $terroir->getNbPaiement();
-
-		// 			$this->load->library("Paiement");
-		// 			$this->load->model("Paiement_Model");
-		// 			for($i = 0;$i < $limite;$i++)
-		// 			{
-		// 				$paiement = new Paiement();
-		// 				$paiement->setIntervention($row);
-
-		// 				$this->Paiement_Model->save($paiement);
-		// 			}
-		// 		}
-		// 	}
-		// 	catch(Exception $e)
-		// 	{
-				
-		// 	}
-		// }
-
 		public function create($intervention_id)
 		{
 			try
@@ -54,13 +20,7 @@
 				$this->load->model("Intervention_Model");
 				$intervention = $this->Intervention_Model->findbyId($intervention_id);
 
-				$this->load->model("GroupeTravail_Model");
-				$groupeTravail = $this->GroupeTravail_Model->findById($intervention->getGroupeTravail()->getId());
-
-				$this->load->model("Terroir_Model");
-				$terroir = $this->Terroir_Model->findById($groupeTravail->getTerroir()->getId());
-
-				$limite = $terroir->getNbPaiement();
+				$limite = $intervention->getNbPaiement();
 
 				$this->load->library("Paiement");
 				$this->load->model("Paiement_Model");
@@ -78,51 +38,106 @@
 			}
 		}
 
-		// public function create()
-		// {
-		// 	try
-		// 	{
-		// 		$this->load->model("Intervention_Model");
-		// 		$interventions = $this->Intervention_Model->findAll();
+		public function etatPaiement()
+		{
+			$this->load->library("Pagination");
+			$this->load->model("Paiement_Model");
 
-		// 		$this->load->model("Paiement_Model");
+			$cpId = "";
 
-		// 		foreach ($interventions as $row)
-		// 		{
-		// 			$key = array();
-		// 			$operand = array();
-		// 			$value = array();
+			$session = $this->session->userdata;
+			if($session["type"] == "cp")
+			{
+				$cpId = $session["user_id"];
+			}
 
-		// 			array_push($key, "intervention_id");
-		// 			array_push($operand, "=");
-		// 			array_push($value, $row->getId());
+			$current_page = $this->input->get("page");
+			//$rang = $this->input->get("rang");
+			$paiement = $this->input->get("paiement");
+			$gtNom = $this->input->get("gtnom");
+			$tri = $this->input->get("tri");
 
-		// 			$columns = array("p.*");
-		// 			$conditions = array(
-		// 				0 => $key,
-		// 				1 => $operand,
-		// 				2 => $value
-		// 			);
+			//$search_criteria["rang"] = $rang;
+			$search_criteria["paiement"] = $paiement;
+			$search_criteria["gtnom"] = $gtNom;
+			$search_criteria["tri"] = $tri;
 
-		// 			$orderby = "";
-		// 			$joins = array();
-		// 			$tableName = "paiement p";
+			$search_url = /*"rang=".$search_criteria["rang"].*/"gtnom=".$search_criteria["gtnom"]."&paiement=".$paiement."&tri=".$tri;
 
-		// 			$paiements = $this->Paiement_Model->find($columns, $conditions, $joins, $orderby, $tableName);
+			$key = array();
+			$operand = array();
+			$value = array();
 
-		// 			$rang = 1;
-		// 			foreach ($paiements as $p)
-		// 			{
-		// 				$p->setRang($rang);
-		// 				$this->Paiement_Model->update($p);
-						
-		// 				$rang++;
-		// 			}
-		// 		}
-		// 	}
-		// 	catch(Exception $e)
-		// 	{
-		// 		throw $e;
-		// 	}
-		// }
+			// if($rang != "" && $rang != "all")
+			// {
+			// 	array_push($key, "rang");
+			// 	array_push($operand, "=");
+			// 	array_push($value, $rang);
+			// }
+
+			if($cpId != "")
+			{
+				array_push($key, "t.cp_id");
+				array_push($operand, "=");
+				array_push($value, $cpId);
+			}
+
+			if($paiement != "" || $paiement != "")
+			{
+				array_push($key, "p.rang");
+				array_push($operand, "=");
+				array_push($value, $paiement);
+			}
+
+			if($gtNom != "")
+			{
+				array_push($key, "gt.nom");
+				array_push($operand, "LIKE");
+				array_push($value, "UPPER('%".$gtNom."%')");
+			}
+
+			array_push($key, "datereelle is null");
+			array_push($operand, "");
+			array_push($value, "");
+
+			$columns = array("p.*");
+			$conditions = array(
+				0 => $key,
+				1 => $operand,
+				2 => $value
+			);
+
+			$joinskey = array("intervention i", "groupetravail gt", "terroir t");
+			$joinsrelation = array("ON p.intervention_id = i.id", "ON gt.id = i.groupetravail_id", "ON t.id = gt.terroir_id");
+
+			$orderby = $tri;
+			$joins = array(
+				0 => $joinskey,
+				1 => $joinsrelation
+			);
+			$tableName = "paiement p";
+
+			$paiements = $this->Paiement_Model->find($columns, $conditions, $joins, $orderby, $tableName);
+
+			$pagination = new Pagination();
+			$elements = 20;
+			$nbpages = $pagination->getNombrePage($paiements, $elements);
+			$debutpage = $pagination->getDebut($current_page, $elements);
+
+			$pages = $pagination->create($current_page, $nbpages);
+
+			$paiements = array_slice($paiements, $debutpage-1, $elements);
+
+			$data["search_criteria"] = $search_criteria;
+			$data["search_url"] = $search_url;
+			//$data["max_rang"] = $maxRang;
+			$data["debut"] = $debutpage;
+			$data["pages"] = $pages;
+			$data["paiements"] = $paiements;
+			$data["contents"] = "etat_paiement_View";
+
+			$session = $this->session->userdata;
+			$template = $session["template"];
+			$this->load->view($template, $data);
+		}
 	}

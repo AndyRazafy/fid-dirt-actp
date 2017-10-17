@@ -15,9 +15,11 @@
 
 		public function chargeProjetLogin($email, $password)
 		{
+			$this->load->model("ChargeProjet_Model");
+			
 			$key = array("email", "motpasse");
 			$operand = array("=", "=");
-			$value = array("'".$email."'", "'".$password."'");
+			$value = array("'".$email."'", "'".sha1($password)."'");
 
 			$columns = array("*");
 			$conditions = array(
@@ -30,7 +32,6 @@
 			$orderBy = "";
 			$tableName = "chargeprojet";
 
-			$this->load->model("ChargeProjet_Model");
 			$result = $this->ChargeProjet_Model->find($columns, $conditions, $link, $joins, $orderBy, $tableName);
 			
 			return $result;
@@ -38,9 +39,11 @@
 
 		public function AdministrationLogin($email, $password)
 		{
+			$this->load->model("Administration_Model");
+
 			$key = array("email", "motpasse");
 			$operand = array("=", "=");
-			$value = array("'".$email."'", "'".$password."'");
+			$value = array("'".$email."'", "'".sha1($password)."'");
 
 			$columns = array("*");
 			$conditions = array(
@@ -52,7 +55,6 @@
 			$orderBy = "";
 			$tableName = "administration";
 
-			$this->load->model("Administration_Model");
 			$result = $this->Administration_Model->find($columns, $conditions, $joins, $orderBy, $tableName);
 			
 			return $result;
@@ -75,7 +77,6 @@
 				$this->session->set_userdata('dateNaissance', $result[0]->getDateNaissance());
 				$this->session->set_userdata('email', $result[0]->getEmail());
 
-				//echo $_SESSION["prenom"];
 				redirect("ChargeProjet_Controller/dashboard");
 			}
 			else
@@ -84,13 +85,14 @@
 				if(sizeof($result) == 1)
 				{
 					$this->session->set_userdata('type', "admin");
+					$this->session->set_userdata('template', "admin_template");
 					$this->session->set_userdata('user_id', $result[0]->getId());
 					$this->session->set_userdata('nom', $result[0]->getNom());
 					$this->session->set_userdata('prenom', $result[0]->getPrenom());
 					$this->session->set_userdata('dateNaissance', $result[0]->getDateNaissance());
 					$this->session->set_userdata('email', $result[0]->getEmail());
 					
-					redirect('Administration_Controller');
+					redirect('Administration_Controller/dashboard');
 				}
 				else
 				{

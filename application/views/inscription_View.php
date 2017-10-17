@@ -44,12 +44,14 @@
 					<div class="login-wrapper">
 				        <div class="box">
 				            <div class="content-wrap">
+				            	<?php
+	                                echo $this->session->flashdata('error');
+	                            ?>
+				            	
 				            	<div class="col-lg-12" style="margin: 5% 0; padding: 0;">
 				            		<img style="max-width: 75%;" src="<?php echo base_url('assets/pictures/fid/logo/logo.jpg'); ?>">
 				            	</div>
-				                <?php
-	                                echo $this->session->flashdata('error');
-	                            ?>
+				                
 	                            <form action="<?php echo site_url('Inscription_Controller/inscription');?>" method="POST">
 					                <div class="form-group text-left">
 										<label>Nom</label>

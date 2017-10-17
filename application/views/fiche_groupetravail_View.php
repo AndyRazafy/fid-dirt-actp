@@ -1,10 +1,10 @@
 		<div class="col-md-10">
 	  		<div class="row">
-	  			<?php
-	  				date_default_timezone_set('Africa/Nairobi');
-		            echo $this->session->flashdata('info');
-		        ?>
 	  			<div class="content-box-large">
+	  				<?php
+		  				date_default_timezone_set('Africa/Nairobi');
+			            echo $this->session->flashdata('info');
+			        ?>
   					<div class="panel-heading">
 						<div class="col-xs-12 panel-title text-center col-centered">
 							<h4>
@@ -24,7 +24,6 @@
 					<hr>
 
 					<div class="panel-body">
-				  		
 				  		<div class="col-lg-12">
 			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
@@ -44,7 +43,7 @@
 			  					</div>
 			  				</div>
 
-			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
+			  				<div class="col-lg-3" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php 
@@ -63,17 +62,6 @@
 			  							?>
 			  						</h5>
 			  						<span class="text-muted text-size-small" >PHASE</span>
-			  					</div>
-			  				</div>
-
-			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
-			  					<div class="content-group">
-			  						<h5 class="text-semibold no-margin" style="margin: 0;">
-			  							<?php 
-			  								echo $groupetravail->getTerroir()->getNbPaiement();
-			  							?>
-			  						</h5>
-			  						<span class="text-muted text-size-small" >NB PAIEMENTS</span>
 			  					</div>
 			  				</div>
 	                    </div>
@@ -106,12 +94,10 @@
 	                    <div class="col-lg-12">
 	                    	<hr>
 	                    	<div class="col-lg-12">
-		                    	<form action="<?php echo site_url('Intervention_Controller/create/'.$groupetravail->getId().'/1/'.$intervention_rang_suiv); ?>" method="POST" id="formCreationIntervention">
-			                    	<h4>
-			                    		<?php echo sizeof($interventions)." Intervention(s)"; ?>
-			                    		<button type="button" onclick="javascript:creerIntervention();" class="btn btn-success" style="padding: 0.5%;">nouvelle</button>	
-			                    	</h4>
-		                    	</form>
+		                    	<h4>
+		                    		<?php echo sizeof($interventions)." Intervention(s)"; ?>
+		                    		<button type="button" onclick="javascript:creerIntervention();" class="btn btn-success" style="padding: 0.5%;">nouvelle</button>	
+		                    	</h4>
 		                    </div>
 			  			</div>
 
@@ -124,9 +110,16 @@
 						            </div>
 						            <div class="modal-body">
 						            	<h3>Voulez-vous vraiment creer ACTP<?php echo $intervention_rang_suiv; ?>?</h3>
+						            	<form action="<?php echo site_url('Intervention_Controller/create/'.$groupetravail->getId().'/1/'.$intervention_rang_suiv); ?>" method="POST" id="formCreationIntervention">
+						            		<input type="hidden" name="gtid" value="<?php echo $groupetravail->getId(); ?>">
+						            		<input type="hidden" name="phaseid" value="1">
+						            		<input type="hidden" name="rang" value="<?php echo $intervention_rang_suiv; ?>">
+						            		<label>* Nombre de paiement</label>
+						            		<input type="number" class="form-control" name="nbpaiement" min="2" max="3" value="" required>
+						            	</form>
 						            </div>
 						            <div class="modal-footer">
-						                <a href="#" class="btn btn-success" onclick="javascript:validationIntervention(<?php echo '\'#formCreationIntervention\''; ?>);" data-dismiss="">Valider</a>
+						                <a href="#" class="btn btn-success" onclick="javascript:validationIntervention('formCreationIntervention');" data-dismiss="">Valider</a>
 						                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 						            </div>
 						        </div>
@@ -142,11 +135,36 @@
 							            		<?php echo "ACTP".$row->getRang(); ?>
 							            	</h2>
 							            </div>
-							            <span class="text-muted text-size-small" ><?php echo "GT - "; ?> <?php echo $groupetravail->getNom(); ?></a></span><br>
-							            <span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <?php echo $groupetravail->getTerroir()->getNom(); ?></a></span>
+							            
+							            <div class="col-lg-3" style="border-left: solid 3px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo $groupetravail->getNom(); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small" ><?php echo "GT"; ?> </span><br>
+						  					</div>
+						  				</div>
+						  				<div class="col-lg-3" style="border-left: solid 3px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<a href="<?php echo site_url('Terroir_Controller/fiche/'.$row->getGroupeTravail()->getTerroir()->getId()); ?>"><?php echo $groupetravail->getTerroir()->getNom(); ?></a>
+						  						</h5>
+							            		<span class="text-muted text-size-small" ><?php echo "UTB"; ?></span>
+						  					</div>
+						  				</div>
+							            <div class="col-lg-1" style="border-left: solid 3px #999;">
+						  					<div class="content-group">
+						  						<h5 class="text-semibold no-margin" style="margin: 0;">
+						  							<?php echo sizeof($row->getPaiements()); ?>
+						  						</h5>
+						  						<span class="text-muted text-size-small" >PAIEMENTS</span>
+						  					</div>
+						  				</div>
 							            <div class="panel-options">
 							              	<a href="javascript:modifierIntervention(<?php echo "'#actp".$row->getId()."'"; ?>);"><button class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Modifier</button></a>
-							              	<a href="javascript:supprimerIntervention(<?php echo "'#validationSuppressionInterventionModal".$row->getId()."'"; ?>);"><button class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button></a>
+							              	<?php if($row == $derniere_intervention) { ?>
+							              		<a href="javascript:supprimerIntervention(<?php echo "'#validationSuppressionInterventionModal".$row->getId()."'"; ?>);"><button class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button></a>
+							            	<?php } ?>
 							            </div>
 							        </div>
 					  				<div class="panel-body">
@@ -155,19 +173,20 @@
 								                <tr>
 								                	<th class="text-center" width="10%">phase</th>
 								                	<th class="text-center">Intitule</th>
+								                	<th class="text-center" width="20%">Durée des travaux activité</th>
 												</tr>
 							              	</thead>
 							              	<tbody>
 							                	<tr>
 							                		<td class="text-center"><?php echo $row->getPhase()->getValeur(); ?></td>
 													<td class="text-center"><?php echo $row->getIntitule()->getNom(); ?></td>
+							                		<td class="text-center"><?php echo $row->getDureeTravaux(); ?></td>
 							                	</tr>
 							              	</tbody>
 							            </table>
 										<table class="table table-striped table-bordered table_vide">
 							              	<thead>
 								                <tr>
-													<th class="text-center">Durée des travaux activité</th>
 													<th class="text-center">Date prévue début travaux activité</th>
 													<th class="text-center">Date réelle début travaux activité</th>
 													<th class="text-center">Date Prév RTX activité</th>
@@ -176,7 +195,6 @@
 							              	</thead>
 							              	<tbody>
 							                	<tr>
-													<td class="text-center"><?php echo $row->getDureeTravaux(); ?></td>
 													<td class="text-center"><?php echo ($row->getDPrevDebut() ? date("d-m-Y", strtotime($row->getDPrevDebut())) : '-'); ?></td>
 													<td class="text-center"><?php echo ($row->getDReelDebut() ? date("d-m-Y", strtotime($row->getDReelDebut())) : '-'); ?></td>
 													<td class="text-center"><?php echo ($row->getDPrevRTX() ? date("d-m-Y", strtotime($row->getDPrevRTX())) : '-'); ?></td>
@@ -254,11 +272,10 @@
 							            	<thead>
 								                <tr>
 										            <?php 
-										            	$i = 1;
 										            	foreach ($row->getPaiements() as $p) { ?>
-										            		<th class="text-center">Date prévue paiement <?php echo $i; ?></th>
-										            		<th class="text-center">Date reelle paiement <?php echo $i; ?></th>
-										            <?php $i++; } ?>
+										            		<th class="text-center">Date prévue paiement <?php echo $p->getRang(); ?></th>
+										            		<th class="text-center">Date reelle paiement <?php echo $p->getRang(); ?></th>
+										            <?php } ?>
 										        </tr>
 										    </thead>
 										    <tbody>
@@ -445,7 +462,7 @@
 							            	<h3>Voulez-vous vraiment modifier ACTP<?php echo $row->getRang(); ?>?</h3>
 							            </div>
 							            <div class="modal-footer">
-							                <a href="#" class="btn btn-success" onclick="javascript:validationIntervention(<?php echo '\'#formModificationIntervention'.$row->getId().'\''; ?>);" data-dismiss="">Valider</a>
+							                <a href="#" class="btn btn-success" onclick="javascript:validationIntervention(<?php echo '\'formModificationIntervention'.$row->getId().'\''; ?>);" data-dismiss="">Valider</a>
 							                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 							            </div>
 							        </div>
@@ -463,7 +480,7 @@
 							            	<h3>Voulez-vous vraiment supprimer ACTP<?php echo $row->getRang(); ?>?</h3>
 							            </div>
 							            <div class="modal-footer">
-							                <a href="#" class="btn btn-success" onclick="javascript:validationIntervention(<?php echo '\'#formSuppressionIntervention'.$row->getId().'\''; ?>);" data-dismiss="">Valider</a>
+							                <a href="#" class="btn btn-success" onclick="javascript:validationIntervention(<?php echo '\'formSuppressionIntervention'.$row->getId().'\''; ?>);" data-dismiss="">Valider</a>
 							                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 							            </div>
 							        </div>
@@ -590,7 +607,18 @@
 
 	    	function validationIntervention(nom)
 	    	{
-    			$(nom).submit();    		
+	    		var f = document.getElementById(nom);
+	    		if(f.checkValidity())
+    			{
+    				var hash = "#";
+	    			nom = hash.concat(nom)
+    				$(nom).submit();   
+    			} 
+    			else
+	    		{
+	    			$("#infoModal h3").text("Veuillez remplir les champs *.");
+	    			$('#infoModal').modal('show');
+	    		}		
 	    	}
 
 	    	function confirmation()

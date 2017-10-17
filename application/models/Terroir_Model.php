@@ -21,10 +21,9 @@
 					"nom" => $terroir->getNom(),
 					"dir_id" => $terroir->getDir()->getId(),
 					"district_id" => $terroir->getDistrict()->getId(),
-					//"nbbenef" => $terroir->getNbBenef(),
-					//"nbinapte" => $terroir->getNbInapte(),
 					"nbsa" => $terroir->getNbsa(),
-					
+					"cp_id" => $terroir->getCp()->getId(),
+										
 					"dpengplan" => $terroir->getDpEngPlan(),
 					"drengplan" => $terroir->getDrEngPlan(),
 					"codemarcheplan" => $terroir->getCodemarchePlan(),
@@ -53,11 +52,6 @@
 
 					"codemarchepaie" => $terroir->getCodemarchePaie(),
 					"montantreelpaie" => $terroir->getMontantReelPaie(),
-
-					//"prevsurftraiteeces" => $terroir->getPrevSurfTraiteeCes(),
-					//"realsurftraiteeces" => $terroir->getRealSurfTraiteeCes(),
-					//"prevsurfreboiseefsp" => $terroir->getPrevSurfReboiseeFsp(),
-					//"realsurfreboiseefsp" => $terroir->getRealSurfReboiseeFsp(),
 
 					"libelleautreindic" => $terroir->getLibelleAutreIndic(),
 					"prevautreindic" => $terroir->getPrevAutreIndic(),
