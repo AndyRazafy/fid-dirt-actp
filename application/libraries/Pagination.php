@@ -17,7 +17,7 @@
 		{
 	        $debut = 1;
 	        $i = 1;
-	        $tmp = intval($taille - 1);
+	        $tmp = $taille - 1;
 
 	        if($numeroPage > 1){
 	           	$debut = $numeroPage;

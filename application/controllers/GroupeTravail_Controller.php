@@ -211,7 +211,7 @@
 			$this->load->model("Intervention_Model");
 			$this->load->library("Pagination");
 
-			$current_page = $this->input->get("page");
+			$current_page = intval($this->input->get("page"));
 			$gt_nom = $this->input->get("gt_nom");
 			$gt_codechantier = $this->input->get("gt_codechantier");
 			$terroir_nom = $this->input->get("terroir_nom");
