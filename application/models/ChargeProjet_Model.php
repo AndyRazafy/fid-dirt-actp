@@ -23,12 +23,52 @@
 			$this->db->insert('chargeprojet', $data);
 		}
 
-		public function update()
+		public function update($chargeProjet)
 		{
+			try
+			{
+				$data = array(
+					"nom" => $chargeProjet->getNom(),
+					"prenom" => $chargeProjet->getPrenom(),
+					"email" => $chargeProjet->getEmail(),
+					"datenaissance" => $chargeProjet->getDateNaissance(),
+					"pseudo" => $chargeProjet->getPseudo()
+				);
+
+				$this->db->where(array('id' => $chargeProjet->getId()));
+				if($this->db->update('chargeprojet', $data))
+				{
+					return true;
+				}
+				else
+				{
+					throw new Exception("Modification interrompu.");
+				}
+			}
+			catch(Exception $e)
+			{
+				throw $e;
+			}
 		}
 
-		public function delete()
+		public function delete($chargeProjet)
 		{
+			try
+			{
+				$this->db->where(array('id' => $chargeProjet->getId()));
+				if($this->db->delete('chargeprojet'))
+				{
+					return true;
+				}
+				else
+				{
+					throw new Exception("Impossible de supprimer ce charge de projet.");
+				}
+			}
+			catch(Exception $e)
+			{
+				throw $e;
+			}
 		}
 
 		public function findById($id)
@@ -55,7 +95,7 @@
 			return $array;
 		}
 
-		public function find($columns, $conditions, $link, $joins, $orderBy, $tableName)
+		public function find($columns, $conditions, $joins, $orderBy, $tableName)
 		{
 			$sql = "SELECT ";
 		
@@ -97,7 +137,7 @@
 				
 				for($i = 0;$i < $len;$i++)
 				{
-					$sql .= " ".$link." ";
+					$sql .= " AND ";
 					for($j = 0;$j < $rows;$j++)
 					{				
 						$sql .= " ".$conditions[$j][$i];

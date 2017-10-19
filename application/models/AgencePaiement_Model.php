@@ -36,7 +36,7 @@
 			try
 			{	
 				$data = array(
-					"nom" => $groupeTravail->getNom()
+					"nom" => $agencePaiement->getNom()
 				);
 
 				$this->db->where(array('id' => $agencePaiement->getId()));

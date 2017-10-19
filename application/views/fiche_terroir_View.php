@@ -11,10 +11,12 @@
 							</h4>
 							<span class="text-muted text-size-small" ><?php echo $terroir->getDistrict()->getNom()." - ".$terroir->getDir()->getNom(); ?></span>
 						</div>	
-						<div class="panel-options">
+						<div class="col-lg-10">
 							<a href="<?php echo site_url('Terroir_Controller/exportToExcel/'.$terroir->getId()); ?>"><button type="button" class="btn btn-success"><i class="glyphicon glyphicon-export"></i> Exporter BDD</button></a>
 							<button type="button" class="btn btn-default" onclick="javascript:etatPhase();"><i class="glyphicon glyphicon-list"></i> Etat phases</button>
-							<button type="button" class="btn btn-primary" onclick="javascript:modifierUtb();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
+			            </div>
+			            <div class="col-lg-2">
+			            	<button type="button" class="btn btn-primary" onclick="javascript:modifierUtb();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 			            </div>
 					</div>
 

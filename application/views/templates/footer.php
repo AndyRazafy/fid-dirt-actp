@@ -1,6 +1,6 @@
     </div>
 
-    <footer class="footer">
+    <footer class="footer" style="width: 100%;">
        <div class="container">
        
           <div class="copy text-center">

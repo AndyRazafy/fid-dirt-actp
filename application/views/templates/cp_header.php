@@ -27,6 +27,7 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['prenom']; ?> <b class="caret"></b></a>
                                         <ul class="dropdown-menu animated fadeInUp">
+                                            <li><a href="<?php echo site_url('ChargeProjet_Controller/fiche/'.$_SESSION['user_id']); ?>">Profile</a></li>
                                             <li><a href="<?php echo site_url('Login_Controller/deconnexion'); ?>">Deconnexion</a></li>
                                         </ul>
                                     </li>
@@ -64,15 +65,6 @@
                                  <!-- Sub menu -->
                                 <ul>
                                     <li><a href="<?php echo site_url('Paiement_Controller/etatPaiement?page=1'); ?>">paiements</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="#">
-                                    <i class=""></i> Exporter
-                                    <span class="caret pull-right"></span>
-                                </a>
-                                <ul>
-                                    <li><a href="<?php echo site_url('Intervention_Controller/exportToExcel'); ?>"><i class=""></i> <button type="button" class="btn btn-primary" >BDD Excel</button></a></li>
                                 </ul>
                             </li>
                         </ul>

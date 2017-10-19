@@ -18,16 +18,47 @@
 					<?php
 				        echo $this->session->flashdata('info');
 				    ?>
-	  				<form action="<?php echo site_url('AgencePaiement_Controller/recherche'); ?>" method="GET" class="form-inline" role="form">
+	  				<form action="<?php echo site_url('Prestataire_Controller/recherche'); ?>" method="GET" class="form-inline" role="form">
 						<input type="hidden" name="page" value="1">
-						<div class="form-group col-sm-5">
+						<div class="form-group">
 							<label>Nom</label>
-							<input type="text" class="form-control" placeholder="Ex: TELMA" name="nom" value="<?php echo $search_criteria["nom"]; ?>">
+							<input type="text" class="form-control" placeholder="Ex: YMCA" name="nom" value="<?php echo $search_criteria["nom"]; ?>">
 						</div>
 						<button type="submit" class="btn btn-primary" style="margin-top: 22px;">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
 					</form>
+
+					<hr>
+
+					<div class="col-lg-12">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th class="text-center" width="5%">#</th>
+									<th><a href="">Prestataire</a></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php 
+									$i = $debut;
+									foreach ($prestataires as $row) { ?>
+									<tr>
+										<td class="text-center"><?php echo $i; $i++; ?></td>
+										<td width="70%"><a href="<?php echo site_url('Prestataire_Controller/fiche/'.$row->getId()); ?>"><?php echo $row->getNom(); ?></a></td>
+									</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+
+						<ul class="pagination">
+							<?php 
+								foreach ($pages as $row) 
+								{ ?>
+									<li class="<?php echo $row->getBootstrapClassName(); ?>"><a href="<?php echo site_url('Prestataire_Controller/recherche?page='.$row->getPage().'&'.$search_url); ?>"><?php echo $row->getPage(); ?></a></li>
+							<?php } ?>
+						</ul>
+					</div>
 
 					<form action="<?php echo site_url('Prestataire_Controller/create'); ?>" method="POST" id="form">
                     	<div class="modal fade" id="newPrestataireModal" role="dialog">
@@ -42,49 +73,15 @@
                                     		<label>* Nom</label>
                                     		<input class="form-control" type="text" name="nom" required>
                                     	</div>
-                                    	<div class="modal-footer">
-	                                    	<button type="button" onClick="javascript:confirmation();" class="btn btn-primary">Creer</button>
-	                                    </div>
+                                   	</div>
+                                	<div class="modal-footer">
+                                    	<button type="button" onClick="javascript:confirmation();" class="btn btn-primary">Creer</button>
+                                    	<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </form>
-
-					<hr>
-
-					<div class="col-lg-12">
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th class="text-center" width="5%">#</th>
-									<th><a href="">Prestataire</a></th>
-									<td></td>
-									<td></td>
-								</tr>
-							</thead>
-							<tbody>
-								<?php 
-									$i = $debut;
-									foreach ($prestataires as $row) { ?>
-									<tr>
-										<td class="text-center"><?php echo $i; $i++; ?></td>
-										<td width="70%"><a href="<?php echo ''; ?>"><?php echo $row->getNom(); ?></a></td>
-										<td><button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i> Modifier</button></td>
-										<td><a href="<?php echo site_url('Prestataire_Controller/delete/'.$row->getId()); ?>"><button class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Supprimer</button></a></td>
-									</tr>
-								<?php } ?>
-							</tbody>
-						</table>
-
-						<ul class="pagination">
-							<?php 
-								foreach ($pages as $row) 
-								{ ?>
-									<li class="<?php echo $row->getBootstrapClassName(); ?>"><a href="<?php echo site_url('Prestataire_Controller/recherche?page='.$row->getPage().'&'.$search_url); ?>"><?php echo $row->getPage(); ?></a></li>
-							<?php } ?>
-						</ul>
-					</div>
 
 					<div class="modal fade" id="validationModal" role="dialog">
 				        <div class="modal-dialog">

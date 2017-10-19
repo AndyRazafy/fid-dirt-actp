@@ -27,12 +27,11 @@
 				1 => $operand,
 				2 => $value
 			);
-			$link = " AND ";
 			$joins = array();
 			$orderBy = "";
 			$tableName = "chargeprojet";
 
-			$result = $this->ChargeProjet_Model->find($columns, $conditions, $link, $joins, $orderBy, $tableName);
+			$result = $this->ChargeProjet_Model->find($columns, $conditions, $joins, $orderBy, $tableName);
 			
 			return $result;
 		}

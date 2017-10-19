@@ -3,7 +3,7 @@
 	  		<div class="row">
 	  			<div class="content-box-large">
   					<div class="panel-heading">
-						<div class="col-xs-12 panel-title">
+						<div class="col-lg-12 panel-title">
 							<h3>
 								Paiements
 							</h3>
@@ -59,7 +59,7 @@
 									{
 										echo "<tr>";
 										echo "<td>".$i."</td>";
-										echo "<td><a href='".site_url("GroupeTravail_Controller/fiche/".$row->getIntervention()->getGroupeTravail()->getId())."'>".$row->getIntervention()->getGroupeTravail()->getNom()."</a></td>";
+										echo "<td><a href='".site_url("GroupeTravail_Controller/fiche/".$row->getIntervention()->getGroupeTravail()->getId())."#ACTP".$row->getIntervention()->getRang()."'>".$row->getIntervention()->getGroupeTravail()->getNom()."</a></td>";
 										echo "<td>ACTP".$row->getIntervention()->getRang()."</td>";
 										echo "<td>PAIEMENT ".$row->getRang()."</td>";
 										echo "<td>".($row->getDatePrevue() ? date("d/m/Y", strtotime($row->getDatePrevue())) : '-')."</td>";

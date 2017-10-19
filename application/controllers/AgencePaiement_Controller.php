@@ -31,7 +31,7 @@
 
 					$this->AgencePaiement_Model->save($agencePaiement);
 					$this->session->set_flashdata("info", "<div class='alert alert-success'><strong>Creation avec succes</strong></div>");
-					redirect("AgencePaiement_Controller/recherche?page=1");
+					redirect("AgencePaiement_Controller/fiche/?page=1");
 				}
 				else
 				{
@@ -47,8 +47,9 @@
 
 		public function update($id)
 		{
-			$this->load->library("AgencePaiement");
 			$this->load->model("AgencePaiement_Model");
+
+			$agencePaiement = $this->AgencePaiement_Model->findById($id);
 
 			$droit = 0;
 			$session = $this->session->userdata;
@@ -62,14 +63,11 @@
 				if($droit == 1)
 				{
 					$nom = $this->input->post("nom");
-
-					$agencePaiement = new AgencePaiement();
-					$agencePaiement->setId($id);
 					$agencePaiement->setNom($nom);
 
 					$this->AgencePaiement_Model->update($agencePaiement);
 					$this->session->set_flashdata("info", "<div class='alert alert-success'><strong>Modification avec succes</strong></div>");
-					redirect("AgencePaiement_Controller/recherche?page=1");
+					redirect("AgencePaiement_Controller/fiche/".$agencePaiement->getId());
 				}
 				else
 				{
@@ -79,7 +77,7 @@
 			catch(Exception $e)
 			{
 				$this->session->set_flashdata("info", "<div class='alert alert-danger'><strong>".$e->getMessage()."</strong></div>");
-				redirect("AgencePaiement_Controller/recherche?page=1");
+				redirect("AgencePaiement_Controller/fiche/".$agencePaiement->getId());
 			}
 		}
 
@@ -115,6 +113,20 @@
 				$this->session->set_flashdata("info", "<div class='alert alert-danger'><strong>".$e->getMessage()."</strong></div>");
 				redirect("AgencePaiement_Controller/recherche?page=1");
 			}
+		}
+
+		public function fiche($id)
+		{
+			$this->load->model("AgencePaiement_Model");
+
+			$session = $this->session->userdata;
+			$template = $session["template"];
+
+			$agencePaiement = $this->AgencePaiement_Model->findById($id);
+
+			$data["agencePaiement"] = $agencePaiement;
+			$data["contents"] = "fiche_agencePaiement_View";
+			$this->load->view($template, $data);
 		}
 
 		public function recherche()

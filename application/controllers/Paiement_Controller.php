@@ -91,7 +91,7 @@
 
 			if($gtNom != "")
 			{
-				array_push($key, "gt.nom");
+				array_push($key, "UPPER(gt.nom)");
 				array_push($operand, "LIKE");
 				array_push($value, "UPPER('%".$gtNom."%')");
 			}

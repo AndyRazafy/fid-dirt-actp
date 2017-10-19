@@ -1,10 +1,6 @@
 		<div class="col-md-10">
 	  		<div class="row">
 	  			<div class="content-box-large">
-	  				<?php
-		  				date_default_timezone_set('Africa/Nairobi');
-			            echo $this->session->flashdata('info');
-			        ?>
   					<div class="panel-heading">
 						<div class="col-xs-12 panel-title text-center col-centered">
 							<h4>
@@ -16,7 +12,10 @@
 							<span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <a href="<?php echo site_url('Terroir_Controller/fiche/'.$groupetravail->getTerroir()->getId()); ?>"> <?php echo $groupetravail->getTerroir()->getNom(); ?></a></span><br>
 							<span class="text-muted text-size-small" ><?php echo $groupetravail->getTerroir()->getDistrict()->getNom()." - ".$groupetravail->getTerroir()->getDir()->getNom(); ?></span>
 						</div>
-						<div class="panel-options">
+						<div class="col-lg-10">
+							<a href="<?php echo site_url('Paiement_Controller/etatPaiement?page=1&gtnom='.$groupetravail->getNom()); ?>"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i> Etat paiement</button></a>
+						</div>
+						<div class="col-lg-2">
 							<button type="button" class="btn btn-primary" onclick="javascript:modifierGt();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 			            </div>
 					</div>
@@ -24,6 +23,10 @@
 					<hr>
 
 					<div class="panel-body">
+						<?php
+			  				date_default_timezone_set('Africa/Nairobi');
+				            echo $this->session->flashdata('info');
+				        ?>
 				  		<div class="col-lg-12">
 			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
@@ -34,7 +37,7 @@
 			  					</div>
 			  				</div>
 			  				
-			  				<div class="col-lg-4" style="border-left: solid 3px #999;">
+			  				<div class="col-lg-3" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php echo $groupetravail->getTerroir()->getPrestataireAgec()->getNom(); ?>
@@ -62,6 +65,17 @@
 			  							?>
 			  						</h5>
 			  						<span class="text-muted text-size-small" >PHASE</span>
+			  					</div>
+			  				</div>
+
+			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
+			  					<div class="content-group">
+			  						<h5 class="text-semibold no-margin" style="margin: 0;">
+			  							<?php 
+			  								echo $groupetravail->getTerroir()->getCp()->getPseudo();
+			  							?>
+			  						</h5>
+			  						<span class="text-muted text-size-small" >CP</span>
 			  					</div>
 			  				</div>
 	                    </div>
@@ -130,7 +144,7 @@
 		                    <div class="col-lg-12">
 				  				<div class="content-box-large">
 					  				<div class="panel-heading">
-							            <div class="panel-title">
+							            <div class="panel-title" id="<?php echo 'ACTP'.$row->getRang(); ?>">
 							            	<h2>
 							            		<?php echo "ACTP".$row->getRang(); ?>
 							            	</h2>

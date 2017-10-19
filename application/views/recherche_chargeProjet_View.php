@@ -4,11 +4,8 @@
 				<div class="panel-heading">
 					<div class="col-lg-10 panel-title">
 						<h3 class="col-lg-5">
-							Recherche agence payeur
+							Recherche charge de proget
 						</h3>
-						<div class="panel-options">
-							<button type="button" class="btn btn-success" onclick="javascript:creerPrestataire();"> nouveau</button>
-			            </div>
 					</div>
 					<hr/>
 				</div>
@@ -18,38 +15,24 @@
 					<?php
 				        echo $this->session->flashdata('info');
 				    ?>
-	  				<form action="<?php echo site_url('AgencePaiement_Controller/recherche'); ?>" method="GET" class="form-inline" role="form">
+	  				<form action="<?php echo site_url('ChargeProjet_Controller/recherche'); ?>" method="GET" class="form-inline" role="form">
 						<input type="hidden" name="page" value="1">
-						<div class="form-group col-sm-5">
+						<div class="form-group col-sm-3">
 							<label>Nom</label>
-							<input type="text" class="form-control" placeholder="Ex: TELMA" name="nom" value="<?php echo $search_criteria["nom"]; ?>">
+							<input type="text" class="form-control" placeholder="" name="nom" value="<?php echo $search_criteria["nom"]; ?>">
+						</div>
+						<div class="form-group col-sm-3">
+							<label>Prenom</label>
+							<input type="text" class="form-control" placeholder="" name="prenom" value="<?php echo $search_criteria["prenom"]; ?>">
+						</div>
+						<div class="form-group col-sm-3">
+							<label>Pseudo</label>
+							<input type="text" class="form-control" placeholder="" name="pseudo" value="<?php echo $search_criteria["pseudo"]; ?>">
 						</div>
 						<button type="submit" class="btn btn-primary" style="margin-top: 22px;">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
 					</form>
-
-					<form action="<?php echo site_url('AgencePaiement_Controller/create'); ?>" method="POST" id="new">
-                    	<div class="modal fade" id="newAgenceModal" role="dialog">
-                            <div class="modal-dialog">
-                            
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Creation agence payeur</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                    	<div class="form-group">
-                                    		<label>* Nom</label>
-                                    		<input class="form-control" type="text" name="nom" required>
-                                    	</div>
-                                    	<div class="modal-footer">
-	                                    	<button type="button" onClick="javascript:confirmation();" class="btn btn-primary">Creer</button>
-	                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
 
 					<hr>
 
@@ -58,16 +41,22 @@
 							<thead>
 								<tr>
 									<th class="text-center" width="5%">#</th>
-									<th><a href="">Agence payeur</a></th>
+									<th><a href="">nom</a></th>
+									<td>prenom</td>
+									<td>pseudo</td>
+									<td>terroir</td>
 								</tr>
 							</thead>
 							<tbody>
 								<?php 
 									$i = $debut;
-									foreach ($agencePaiements as $row) { ?>
+									foreach ($cps as $row) { ?>
 									<tr>
 										<td class="text-center"><?php echo $i; $i++; ?></td>
-										<td width="70%"><a href="<?php echo site_url('AgencePaiement_Controller/fiche/'.$row->getId()); ?>"><?php echo $row->getNom(); ?></a></td>
+										<td width="70%"><a href="<?php echo site_url('ChargeProjet_Controller/fiche/'.$row->getId()); ?>"><?php echo $row->getNom(); ?></a></td>
+										<td width="70%"><a href="<?php echo site_url('ChargeProjet_Controller/fiche/'.$row->getId()); ?>"><?php echo $row->getPrenom(); ?></a></td>
+										<td width="70%"><a href="<?php echo site_url('ChargeProjet_Controller/fiche/'.$row->getId()); ?>"><?php echo $row->getPseudo(); ?></a></td>
+										<td width="70%"></td>
 									</tr>
 								<?php } ?>
 							</tbody>
@@ -77,7 +66,7 @@
 							<?php 
 								foreach ($pages as $row) 
 								{ ?>
-									<li class="<?php echo $row->getBootstrapClassName(); ?>"><a href="<?php echo site_url('AgencePaiement_Controller/recherche?page='.$row->getPage().'&'.$search_url); ?>"><?php echo $row->getPage(); ?></a></li>
+									<li class="<?php echo $row->getBootstrapClassName(); ?>"><a href="<?php echo site_url('ChargePorjet_Controller/recherche?page='.$row->getPage().'&'.$search_url); ?>"><?php echo $row->getPage(); ?></a></li>
 							<?php } ?>
 						</ul>
 					</div>
@@ -93,7 +82,7 @@
 					            	<h3>Voulez-vous vraiment creer ce prestataire?</h3>
 					            </div>
 					            <div class="modal-footer">
-					                <a href="#" class="btn btn-success" onclick="javascript:validation();" data-dismiss="">Valider</a>
+					                <a href="#" class="btn btn-success" onclick="javascript:validation('form');" data-dismiss="">Valider</a>
 					                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
 					            </div>
 					        </div>
@@ -122,14 +111,9 @@
 	</div>
 
 	<script type="text/javascript">
-		function creerPrestataire()
-    	{
-			$('#newAgenceModal').modal('show');
-    	}
-
     	function confirmation()
     	{
-    		var f = document.getElementById('new');
+    		var f = document.getElementById('form');
     		if(f.checkValidity())
     		{
 				$('#validationModal').modal('show');
@@ -141,8 +125,17 @@
     		}
     	}
 
-    	function validation()
+    	function supprimerCp(nom)
     	{
-    		$('#new').submit();
+    		var hash = "#";
+			nom = hash.concat(nom)
+			$(nom).modal('show');	
     	}
-   	</script>
+
+    	function validation(form)
+    	{
+    		var hash = "#";
+			form = hash.concat(form)
+    		$(form).submit();
+    	}
+	</script>

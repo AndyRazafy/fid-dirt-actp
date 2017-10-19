@@ -60,8 +60,9 @@
                                 <ul>
                                     <li><a href="<?php echo site_url('Terroir_Controller/recherche?page=1'); ?>">UTB</a></li>
                                     <li><a href="<?php echo site_url('GroupeTravail_Controller/recherche?page=1'); ?>">GT</a></li>
-                                    <li><a href="<?php echo site_url('Prestataire_Controller/recherche?page=1'); ?>">Prestataire</a></li>
-                                    <li><a href="<?php echo site_url('AgencePaiement_Controller/recherche?page=1'); ?>">Agence paiement</a></li>
+                                    <li><a href="<?php echo site_url('ChargeProjet_Controller/recherche?page=1'); ?>">CP</a></li>
+                                    <li><a href="<?php echo site_url('Prestataire_Controller/recherche?page=1'); ?>">Prestataires</a></li>
+                                    <li><a href="<?php echo site_url('AgencePaiement_Controller/recherche?page=1'); ?>">Agence de paiement</a></li>
                                 </ul>
                             </li>
                             <li class="submenu">

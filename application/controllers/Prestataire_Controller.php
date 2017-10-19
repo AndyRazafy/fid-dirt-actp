@@ -47,8 +47,9 @@
 
 		public function update($id)
 		{
-			$this->load->library("Prestataire");
 			$this->load->model("Prestataire_Model");
+
+			$prestataire = $this->Prestataire_Model->findById($id);
 
 			$droit = 0;
 			$session = $this->session->userdata;
@@ -62,14 +63,11 @@
 				if($droit == 1)
 				{
 					$nom = $this->input->post("nom");
-
-					$prestataire = new Prestataire();
-					$prestataire->setId($id);
 					$prestataire->setNom($nom);
 
 					$this->Prestataire_Model->update($prestataire);
 					$this->session->set_flashdata("info", "<div class='alert alert-success'><strong>Modification avec succes</strong></div>");
-					redirect("Prestataire_Controller/recherche?page=1");
+					redirect("Prestataire_Controller/fiche/".$prestataire->getId());
 				}
 				else
 				{
@@ -79,7 +77,7 @@
 			catch(Exception $e)
 			{
 				$this->session->set_flashdata("info", "<div class='alert alert-danger'><strong>".$e->getMessage()."</strong></div>");
-				redirect("Prestataire_Controller/recherche?page=1");
+				redirect("Prestataire_Controller/fiche/".$prestataire->getId());
 			}
 		}
 
@@ -100,8 +98,8 @@
 				if($droit == 1)
 				{
 					$prestataire = $this->Prestataire_Model->findById($id);
-
 					$this->Prestataire_Model->delete($prestataire);
+					
 					$this->session->set_flashdata("info", "<div class='alert alert-success'><strong>Suppression avec succes</strong></div>");
 					redirect("Prestataire_Controller/recherche?page=1");
 				}
@@ -115,6 +113,20 @@
 				$this->session->set_flashdata("info", "<div class='alert alert-danger'><strong>".$e->getMessage()."</strong></div>");
 				redirect("Prestataire_Controller/recherche?page=1");
 			}
+		}
+
+		public function fiche($id)
+		{
+			$this->load->model("Prestataire_Model");
+
+			$session = $this->session->userdata;
+			$template = $session["template"];
+
+			$prestataire = $this->Prestataire_Model->findById($id);
+
+			$data["prestataire"] = $prestataire;
+			$data["contents"] = "fiche_prestataire_View";
+			$this->load->view($template, $data);
 		}
 
 		public function recherche()
