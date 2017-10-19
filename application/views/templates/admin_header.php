@@ -81,7 +81,7 @@
                                     <span class="caret pull-right"></span>
                                 </a>
                                 <ul>
-                                    <li><a href="<?php echo site_url('Intervention_Controller/exportToExcel'); ?>"><i class=""></i> <button type="button" class="btn btn-primary" >BDD Excel</button></a></li>
+                                    <li><a href="<?php echo site_url('GroupeTravail_Controller/exportToExcel'); ?>"><i class=""></i> <button type="button" class="btn btn-primary" >BDD Excel</button></a></li>
                                 </ul>
                             </li>
                         </ul>
