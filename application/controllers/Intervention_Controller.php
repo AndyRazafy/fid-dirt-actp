@@ -49,7 +49,6 @@
 					$intervention->setGroupeTravail($groupeTravail);
 					$intervention->setPhase($phase);
 					$intervention->setRang($rang);
-					$intervention->setNbPaiement($nbPaiement);
 
 					$intervention->setDureeTravaux(0);
 
@@ -80,7 +79,7 @@
 					$this->Intervention_Model->save($intervention);
 					$intervention->setId($this->db->insert_id());
 
-					$limite = $intervention->getNbPaiement();
+					$limite = $nbPaiement;
 
 					$this->load->library("Paiement");
 					$this->load->model("Paiement_Model");
