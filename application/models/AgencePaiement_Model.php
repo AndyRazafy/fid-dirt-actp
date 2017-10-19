@@ -80,7 +80,7 @@
 			$query = $this->db->get_where('agencepaiement', array('id' => $id));
 			$result = $query->result();
 
-			$this->load->library('agencepaiement');
+			$this->load->library('AgencePaiement');
 			$array = AgencePaiement::init($result);
 
 			return $array[0];
@@ -93,7 +93,7 @@
 			$query = $this->db->get();        
 			$result = $query->result();
 
-			$this->load->library('agencepaiement');
+			$this->load->library('AgencePaiement');
 			$array = AgencePaiement::init($result);
 
 			return $array;
@@ -159,7 +159,7 @@
 			$query =  $this->db->query($sql);
 			$result = $query->result();
 
-			$this->load->library("agencepaiement");
+			$this->load->library('AgencePaiement');
 			$array = AgencePaiement::init($result);
 
 			return $array;
