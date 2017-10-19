@@ -111,7 +111,7 @@
 			catch(Exception $e)
 			{
 				$this->session->set_flashdata("info", "<div class='alert alert-danger'><strong>".$e->getMessage()."</strong></div>");
-				redirect("Prestataire_Controller/recherche?page=1");
+				redirect("Prestataire_Controller/fiche/".$prestataire->getId());
 			}
 		}
 

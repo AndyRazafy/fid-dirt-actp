@@ -161,7 +161,7 @@
 	                <h4 class="modal-title">Suppression</h4>
 	            </div>
 	            <div class="modal-body">
-	            	<h3>Voulez-vous vraiment supprimer ce prestataire?</h3>
+	            	<h3>Voulez-vous vraiment supprimer ce charge de projet?</h3>
 	            </div>
 	            <div class="modal-footer">
 	                <a href="#" class="btn btn-success" onclick="javascript:validationSuppression();" data-dismiss="">Valider</a>

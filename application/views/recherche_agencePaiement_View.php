@@ -90,7 +90,7 @@
 					                <h4 class="modal-title">Creation</h4>
 					            </div>
 					            <div class="modal-body">
-					            	<h3>Voulez-vous vraiment creer ce prestataire?</h3>
+					            	<h3>Voulez-vous vraiment creer cette agence de paiement?</h3>
 					            </div>
 					            <div class="modal-footer">
 					                <a href="#" class="btn btn-success" onclick="javascript:validation();" data-dismiss="">Valider</a>

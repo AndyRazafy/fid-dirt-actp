@@ -70,11 +70,15 @@
 					$this->session->set_flashdata("info", "<div class='alert alert-success'><strong>Suppression avec succes</strong></div>");
 					redirect("ChargeProjet_Controller/recherche?page=1");
 				}
+				else
+				{
+					throw new Exception("Suppression interrompue. Vous ne disposez pas des droits pour supprimer.");
+				}
 			}
 			catch(Exception $e)
 			{
 				$this->session->set_flashdata("info", "<div class='alert alert-danger'><strong>".$e->getMessage()."</strong></div>");
-				redirect("ChargeProjet_Controller/recherche?page=1");
+				redirect("ChargeProjet_Controller/fiche/".$id);
 			}
 		}
 

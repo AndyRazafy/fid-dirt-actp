@@ -7,7 +7,6 @@
 		private $dureeTravaux;
 		private $dPrevDebut;
 		private $dReelDebut;
-		private $nbPaiement;
 
 		private $dPrevRTX;
 		private $dReelRTX;
@@ -63,7 +62,6 @@
 				$intervention->setDureeTravaux($row->dureetravaux);
 				$intervention->setDPrevDebut($row->dpdebut);
 				$intervention->setDReelDebut($row->drdebut);
-				$intervention->setNbPaiement($row->nbpaiement);
 				
 				$intervention->setDPrevRTX($row->dprtx);
 				$intervention->setDReelRTX($row->drrtx);
@@ -398,13 +396,5 @@
 
 		public function setIntitules($intitules){
 			$this->intitules = $intitules;
-		}
-
-		public function getNbPaiement(){
-			return $this->nbPaiement;
-		}
-
-		public function setNbPaiement($nbPaiement){
-			$this->nbPaiement = $nbPaiement;
 		}
 	}
