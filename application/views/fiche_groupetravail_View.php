@@ -12,12 +12,10 @@
 							<span class="text-muted text-size-small" ><?php echo "UTB - "; ?> <a href="<?php echo site_url('Terroir_Controller/fiche/'.$groupetravail->getTerroir()->getId()); ?>"> <?php echo $groupetravail->getTerroir()->getNom(); ?></a></span><br>
 							<span class="text-muted text-size-small" ><?php echo $groupetravail->getTerroir()->getDistrict()->getNom()." - ".$groupetravail->getTerroir()->getDir()->getNom(); ?></span>
 						</div>
-						<div class="col-lg-10">
+						<div class="col-lg-12">
 							<a href="<?php echo site_url('Paiement_Controller/etatPaiement?page=1&gtnom='.$groupetravail->getNom()); ?>"><button type="button" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i> Etat paiement</button></a>
+							<button type="button" class="btn btn-primary pull-right" onclick="javascript:modifierGt();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
 						</div>
-						<div class="col-lg-2">
-							<button type="button" class="btn btn-primary" onclick="javascript:modifierGt();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
-			            </div>
 					</div>
 
 					<hr>
@@ -37,23 +35,32 @@
 			  					</div>
 			  				</div>
 			  				
-			  				<div class="col-lg-3" style="border-left: solid 3px #999;">
+			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
-			  							<?php echo $groupetravail->getTerroir()->getPrestataireAgec()->getNom(); ?>
+			  							<?php echo number_format($groupetravail->getNbBenef(), 0, ",", " "); ?>
 			  						</h5>
-			  						<span class="text-muted text-size-small" >AGEC</span>
+			  						<span class="text-muted text-size-small">NB BENEFICIAIRE</span>
+			  					</div>
+			  				</div>
+			  				
+			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
+			  					<div class="content-group">
+			  						<h5 class="text-semibold no-margin" style="margin: 0;">
+			  							<?php echo number_format($groupetravail->getNbInapte(), 0, ",", " "); ?>
+			  						</h5>
+			  						<span class="text-muted text-size-small" >NB INAPTE</span>
 			  					</div>
 			  				</div>
 
-			  				<div class="col-lg-3" style="border-left: solid 3px #999;">
+			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php 
-			  								echo $groupetravail->getTerroir()->getAgencePaiement()->getNom();
+			  								echo number_format($groupetravail->getNbBenef() - $groupetravail->getNbInapte(), 0, ",", " ");
 			  							?>
 			  						</h5>
-			  						<span class="text-muted text-size-small" >AGENCE PAYEUR</span>
+			  						<span class="text-muted text-size-small" >NB TRAVAILLEUR</span>
 			  					</div>
 			  				</div>
 
@@ -68,7 +75,7 @@
 			  					</div>
 			  				</div>
 
-			  				<div class="col-lg-2" style="border-left: solid 3px #999;">
+			  				<div class="col-lg-1" style="border-left: solid 3px #999;">
 			  					<div class="content-group">
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php 
@@ -76,6 +83,29 @@
 			  							?>
 			  						</h5>
 			  						<span class="text-muted text-size-small" >CP</span>
+			  					</div>
+			  				</div>
+	                    </div>
+
+	                    <div class="col-lg-12">
+	                    	<hr>
+			  				<div class="col-lg-6" style="border-left: solid 3px #999;">
+			  					<div class="content-group">
+			  						<h5 class="text-semibold no-margin" style="margin: 0;">
+			  							<?php echo $groupetravail->getTerroir()->getPrestataireAgec()->getNom(); ?>
+			  						</h5>
+			  						<span class="text-muted text-size-small" >AGEC</span>
+			  					</div>
+			  				</div>
+
+			  				<div class="col-lg-6" style="border-left: solid 3px #999;">
+			  					<div class="content-group">
+			  						<h5 class="text-semibold no-margin" style="margin: 0;">
+			  							<?php 
+			  								echo $groupetravail->getTerroir()->getAgencePaiement()->getNom();
+			  							?>
+			  						</h5>
+			  						<span class="text-muted text-size-small" >AGENCE PAYEUR</span>
 			  					</div>
 			  				</div>
 	                    </div>

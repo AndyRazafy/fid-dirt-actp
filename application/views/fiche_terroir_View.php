@@ -15,9 +15,9 @@
 							<a href="<?php echo site_url('Terroir_Controller/exportToExcel/'.$terroir->getId()); ?>"><button type="button" class="btn btn-success"><i class="glyphicon glyphicon-export"></i> Exporter BDD</button></a>
 							<button type="button" class="btn btn-default" onclick="javascript:etatPhase();"><i class="glyphicon glyphicon-list"></i> Etat phases</button>
 			            </div>
-			            <div class="col-lg-2">
+<!-- 			            <div class="col-lg-2">
 			            	<button type="button" class="btn btn-primary" onclick="javascript:modifierUtb();"><i class="glyphicon glyphicon-pencil"></i> Modifier</button>
-			            </div>
+			            </div> -->
 					</div>
 
 					<div class="panel-body">
@@ -118,17 +118,8 @@
 				  						<span class="text-muted text-size-small">GROUPE DE TRAVAIL</span>
 				  					</div>
 				  				</div>
-				  				
-				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
-				  					<div class="content-group">
-				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo $terroir->getNbsa(); ?>
-				  						</h4>
-				  						<span class="text-muted text-size-small" >SOUS ACTIVITEES</span>
-				  					</div>
-				  				</div>
 
-				  				<div class="col-lg-3" style="border-left: solid 2px #999;">
+				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
 				  							<?php echo number_format($terroir->getNbBenef(), 0, ",", " "); ?>
@@ -137,12 +128,30 @@
 				  					</div>
 				  				</div>
 
-				  				<div class="col-lg-3" style="border-left: solid 2px #999;">
+				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
 				  							<?php echo number_format($terroir->getNbInapte(), 0, ",", " "); ?>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >INAPTES</span>
+				  					</div>
+				  				</div>
+
+				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
+				  					<div class="content-group">
+				  						<h4 class="text-semibold no-margin" style="margin: 0;">
+				  							<?php echo number_format($terroir->getNbBenef() - $terroir->getNbInapte(), 0, ",", " "); ?>
+				  						</h4>
+				  						<span class="text-muted text-size-small" >NB TRAVAILLEUR</span>
+				  					</div>
+				  				</div>
+
+				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
+				  					<div class="content-group">
+				  						<h4 class="text-semibold no-margin" style="margin: 0;">
+				  							<?php echo number_format(($terroir->getNbBenef() / $terroir->getNbInapte()), 2, ",", " ")."%"; ?>
+				  						</h4>
+				  						<span class="text-muted text-size-small" >POURCENTAGE INAPTE</span>
 				  					</div>
 				  				</div>
 

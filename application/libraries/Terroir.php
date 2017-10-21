@@ -123,8 +123,6 @@
 				else
 					$terroir->setCp(new ChargeProjet());
 				
-				//$terroir->setNbBenef($row->nbbenef);
-				//$terroir->setNbInapte($row->nbinapte);
 				$terroir->setNbsa($row->nbsa);
 				
 				$terroir->setDpEngPlan($row->dpengplan);
@@ -153,11 +151,6 @@
 
 				$terroir->setCodemarchePaie($row->codemarchepaie);
 				$terroir->setMontantReelPaie($row->montantreelpaie);
-				
-				// $terroir->setPrevSurfTraiteeCes($row->prevsurftraiteeces);
-				// $terroir->setRealSurfTraiteeCes($row->realsurftraiteeces);
-				// $terroir->setPrevSurfBoiseeFsp($row->prevsurfBoiseefsp);
-				// $terroir->setRealSurfBoiseeFsp($row->realsurfBoiseefsp);
 
 				$terroir->setLibelleAutreIndic($row->libelleautreindic);
 				$terroir->setPrevAutreIndic($row->prevautreindic);
@@ -195,17 +188,23 @@
 		}
 
 		public function getNbBenef(){
-			//return $this->nbBenef;
-
-			$nb = 0;
-			foreach ($this->getGroupeTravails() as $gt)
+			if($this->nbBenef != null)
 			{
-				foreach ($gt->getInterventions() as $inter)
-				{
-					$nb += $inter->getNbReelBenef();
-				}
+				return $this->nbBenef;
 			}
-			return $nb;
+			else
+			{
+				$nb = 0;
+				foreach ($this->getGroupeTravails() as $gt)
+				{
+					foreach ($gt->getInterventions() as $inter)
+					{
+						$nb += $inter->getNbReelBenef();
+					}
+				}
+				$this->nbBenef = $nb;
+				return $this->nbBenef;
+			}
 		}
 
 		public function setNbBenef($nbBenef){
@@ -213,17 +212,23 @@
 		}
 
 		public function getNbInapte(){
-			//return $this->nbInapte;
-
-			$nb = 0;
-			foreach ($this->getGroupeTravails() as $gt)
+			if($this->nbInapte != null)
 			{
-				foreach ($gt->getInterventions() as $inter)
-				{
-					$nb += $inter->getNbBenefInapte();
-				}
+				return $this->nbInapte;
 			}
-			return $nb;
+			else
+			{
+				$nb = 0;
+				foreach ($this->getGroupeTravails() as $gt)
+				{
+					foreach ($gt->getInterventions() as $inter)
+					{
+						$nb += $inter->getNbBenefInapte();
+					}
+				}
+				$this->nbInapte = $nb;
+				return $this->nbInapte;
+			}
 		}
 
 		public function setNbInapte($nbInapte){

@@ -8,6 +8,9 @@
 		private $terroir;
 		private $interventions;
 
+		private $nbBenef;
+		private $nbInapte;
+
 		public static function init($data)
 		{
 			$CI =& get_instance();
@@ -78,5 +81,47 @@
 			}
 
 			return $result;
+		}
+
+		public function getNbBenef(){
+			if($this->nbBenef != null)
+			{
+				return $this->nbBenef;
+			}
+			else
+			{
+				$nb = 0;
+				foreach ($this->getInterventions() as $inter)
+				{
+					$nb += $inter->getNbReelBenef();
+				}
+				$this->nbBenef = $nb;
+				return $this->nbBenef;
+			}
+		}
+
+		public function setNbBenef($nbBenef){
+			$this->nbBenef = $nbBenef;
+		}
+
+		public function getNbInapte(){
+			if($this->nbInapte != null)
+			{
+				return $this->nbInapte;
+			}
+			else
+			{
+				$nb = 0;
+				foreach ($this->getInterventions() as $inter)
+				{
+					$nb += $inter->getNbBenefInapte();
+				}
+				$this->nbInapte = $nb;
+				return $this->nbInapte;
+			}
+		}
+
+		public function setNbInapte($nbInapte){
+			$this->nbInapte = $nbInapte;
 		}
 	}
