@@ -7,7 +7,7 @@
 							Recherche agence payeur
 						</h3>
 						<div class="panel-options">
-							<button type="button" class="btn btn-success" onclick="javascript:creerPrestataire();"> nouveau</button>
+							<button type="button" class="btn btn-success" onclick="javascript:creerPrestataire();"> Ajouter</button>
 			            </div>
 					</div>
 					<hr/>

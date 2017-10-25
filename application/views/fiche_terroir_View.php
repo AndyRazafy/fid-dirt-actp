@@ -72,7 +72,7 @@
 								<!-- Modal content-->
 							        <div class="modal-content">
 							            <div class="modal-header">
-							                <h4 class="modal-title">Etat phase</h4>
+							                <h4 class="modal-title">Etat phases</h4>
 							            </div>
 							            <div class="modal-body">
 							            	<table class="table table-bordered table-hover">
@@ -94,11 +94,134 @@
 															echo "<tr><td>".$row->getValeur()."</td>";
 															for($rang = 1;$rang <= $max_rang;$rang++)
 															{
-																echo "<td>".sizeof($etat[$row->getValeur()][$rang])."</td>";
+																echo "<td>".sizeof($etatPhase[$row->getValeur()][$rang])."</td>";
 															}
 															echo "</tr>";
 														}
 													?>
+												</tbody>
+											</table>
+							            </div>
+							            <div class="modal-footer">
+							                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+
+							<div class="modal fade" id="etatBenefModal" role="dialog">
+						        <div class="modal-dialog">
+								<!-- Modal content-->
+							        <div class="modal-content">
+							            <div class="modal-header">
+							                <h4 class="modal-title">Bénéficiaires</h4>
+							            </div>
+							            <div class="modal-body">
+							            	<table class="table table-bordered table-hover">
+												<thead class="thead">
+													<tr>
+														<th></th>
+														<?php
+															for($rang = 1; $rang <= $max_rang;$rang++)
+															{
+																echo "<th>ACTP".$rang."</th>";
+															}
+														?>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Nb bénéficiaires</td>
+														<?php
+
+															for($rang = 1;$rang <= $max_rang;$rang++)
+															{
+																echo "<td>".$etatBenef[0][$rang]."</td>";
+															}
+														?>
+													</tr>
+												</tbody>
+											</table>
+							            </div>
+							            <div class="modal-footer">
+							                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+
+							<div class="modal fade" id="etatInapteModal" role="dialog">
+						        <div class="modal-dialog">
+								<!-- Modal content-->
+							        <div class="modal-content">
+							            <div class="modal-header">
+							                <h4 class="modal-title">Inaptes</h4>
+							            </div>
+							            <div class="modal-body">
+							            	<table class="table table-bordered table-hover">
+												<thead class="thead">
+													<tr>
+														<th></th>
+														<?php
+															for($rang = 1; $rang <= $max_rang;$rang++)
+															{
+																echo "<th>ACTP".$rang."</th>";
+															}
+														?>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Nb inaptes</td>
+														<?php
+
+															for($rang = 1;$rang <= $max_rang;$rang++)
+															{
+																echo "<td>".$etatInapte[0][$rang]."</td>";
+															}
+														?>
+													</tr>
+												</tbody>
+											</table>
+							            </div>
+							            <div class="modal-footer">
+							                <a href="#" class="btn btn-default" data-dismiss="modal">Fermer</a>
+							            </div>
+							        </div>
+							    </div>
+							</div>
+
+							<div class="modal fade" id="etatTravailleurModal" role="dialog">
+						        <div class="modal-dialog">
+								<!-- Modal content-->
+							        <div class="modal-content">
+							            <div class="modal-header">
+							                <h4 class="modal-title">Travailleurs</h4>
+							            </div>
+							            <div class="modal-body">
+							            	<table class="table table-bordered table-hover">
+												<thead class="thead">
+													<tr>
+														<th></th>
+														<?php
+															for($rang = 1; $rang <= $max_rang;$rang++)
+															{
+																echo "<th>ACTP".$rang."</th>";
+															}
+														?>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Nb travailleurs</td>
+														<?php
+
+															for($rang = 1;$rang <= $max_rang;$rang++)
+															{
+																echo "<td>".$etatTravailleur[0][$rang]."</td>";
+															}
+														?>
+													</tr>
 												</tbody>
 											</table>
 							            </div>
@@ -142,7 +265,7 @@
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
 				  							<?php echo number_format($terroir->getNbBenef() - $terroir->getNbInapte(), 0, ",", " "); ?>
 				  						</h4>
-				  						<span class="text-muted text-size-small" >NB TRAVAILLEUR</span>
+				  						<span class="text-muted text-size-small" >NB TRAVAILLEURS</span>
 				  					</div>
 				  				</div>
 
@@ -857,6 +980,21 @@
 	    	function etatPhase()
 	    	{
     			$('#etatPhaseModal').modal('show');
+	    	}
+
+	    	function etatBenef()
+	    	{
+    			$('#etatBenefModal').modal('show');
+	    	}
+
+	    	function etatInapte()
+	    	{
+    			$('#etatInapteModal').modal('show');
+	    	}
+
+	    	function etatTravailleur()
+	    	{
+    			$('#etatTravailleurModal').modal('show');
 	    	}
 
 	    	function modifierPlanification()

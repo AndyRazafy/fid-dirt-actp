@@ -21,9 +21,25 @@
 									<input type="text" class="form-control" placeholder="Ex: BELANITRA" name="gtnom" value="<?php echo $search_criteria["gtnom"]; ?>">
 								</div>
 								<div class="form-group col-lg-2">
+                            		<label for="intervention">intervention</label>
+                            		<select class="form-control" name="intervention">
+                    					<option value="<?php echo $search_criteria["intervention"]; ?>"><?php echo $search_criteria["intervention"]; ?></option>
+										<?php if($search_criteria["intervention"] != ""){ ?>
+											<option value="">tout</option>
+										<?php } ?>
+										<?php for ($i = 1;$i < 4;$i++) {
+											if($search_criteria["intervention"] != $i) {?>
+												<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+										<?php } } ?>
+									</select>
+                            	</div>
+								<div class="form-group col-lg-2">
                             		<label for="paiement">paiement</label>
                             		<select class="form-control" name="paiement">
                             			<option value="<?php echo $search_criteria["paiement"]; ?>"><?php echo $search_criteria["paiement"]; ?></option>
+										<?php if($search_criteria["paiement"] != ""){ ?>
+											<option value="">tout</option>
+										<?php } ?>
 										<?php for ($i = 1;$i < 4;$i++) { 
 											if($search_criteria["paiement"] != $i) {?>
 											<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
@@ -48,7 +64,7 @@
 									<th>intervention</th>
 									<th>paiement</th>
 									<th>date prevue paiement</th>
-									<th>jour(s)</th>
+									<th>ecart</th>
 								</tr>
 							</thead>
 							<tbody>

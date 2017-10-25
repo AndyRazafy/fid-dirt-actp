@@ -140,7 +140,7 @@
 	                    	<div class="col-lg-12">
 		                    	<h4>
 		                    		<?php echo sizeof($interventions)." Intervention(s)"; ?>
-		                    		<button type="button" onclick="javascript:creerIntervention();" class="btn btn-success" style="padding: 0.5%;">nouvelle</button>	
+		                    		<button type="button" onclick="javascript:creerIntervention();" class="btn btn-success" style="padding: 0.5%;">Ajouter</button>	
 		                    	</h4>
 		                    </div>
 			  			</div>

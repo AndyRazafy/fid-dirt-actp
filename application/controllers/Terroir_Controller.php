@@ -293,6 +293,31 @@
 				}
 			}
 
+			$etatBenef = array();
+			$etatInapte = array();
+			$etatTravailleur = array();
+
+			for($i = 1;$i <= $maxRang;$i++)
+			{
+				$benef = 0;
+				$inapte = 0;
+				foreach ($terroir->getGroupeTravails() as $gt)
+				{
+					foreach ($gt->getInterventions() as $inter)
+					{
+						if($inter->getRang() == $i)
+						{
+							$benef += $inter->getNbReelBenef();
+							$inapte += $inter->getNbBenefInapte();
+							break;
+						}
+					}
+				}
+				$etatBenef[0][$i] = $benef;
+				$etatInapte[0][$i] = $inapte;
+				$etatTravailleur[0][$i] = $benef - $inapte;
+			}
+
 			$droit = 0;
 			$session = $this->session->userdata;
 			if($session["type"] == "admin")
@@ -306,7 +331,10 @@
 			}
 
 			$data["droit"] = $droit;
-			$data["etat"] = $etat;
+			$data["etatTravailleur"] = $etatTravailleur;
+			$data["etatInapte"] = $etatInapte;
+			$data["etatBenef"] = $etatBenef;
+			$data["etatPhase"] = $etatPhase;
 			$data["phases"] = $phases;
 			$data["max_rang"] = $maxRang;
 			$data["cps"] = $cps;

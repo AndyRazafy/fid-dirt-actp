@@ -52,17 +52,17 @@
 			}
 
 			$current_page = $this->input->get("page");
-			//$rang = $this->input->get("rang");
+			$intervention = $this->input->get("intervention");
 			$paiement = $this->input->get("paiement");
 			$gtNom = $this->input->get("gtnom");
 			$tri = $this->input->get("tri");
 
-			//$search_criteria["rang"] = $rang;
+			$search_criteria["intervention"] = $intervention;
 			$search_criteria["paiement"] = $paiement;
 			$search_criteria["gtnom"] = $gtNom;
 			$search_criteria["tri"] = $tri;
 
-			$search_url = /*"rang=".$search_criteria["rang"].*/"gtnom=".$search_criteria["gtnom"]."&paiement=".$paiement."&tri=".$tri;
+			$search_url = "intervention=".$search_criteria["intervention"]."&gtnom=".$search_criteria["gtnom"]."&paiement=".$paiement."&tri=".$tri;
 
 			$key = array();
 			$operand = array();
@@ -82,7 +82,7 @@
 				array_push($value, $cpId);
 			}
 
-			if($paiement != "" || $paiement != "")
+			if($paiement != "" && $paiement != "tout")
 			{
 				array_push($key, "p.rang");
 				array_push($operand, "=");
