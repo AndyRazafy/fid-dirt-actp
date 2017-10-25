@@ -272,7 +272,7 @@
 				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo number_format(($terroir->getNbInapte() / $terroir->getNbBenef())*100), 2, ",", " ")."%"; ?>
+				  							<?php echo number_format(($terroir->getNbInapte() / $terroir->getNbBenef())*100, 2, ",", " ")."%"; ?>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >POURCENTAGE INAPTE</span>
 				  					</div>
