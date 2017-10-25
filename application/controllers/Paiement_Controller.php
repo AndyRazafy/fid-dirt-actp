@@ -82,6 +82,13 @@
 				array_push($value, $cpId);
 			}
 
+			if($intervention != "" && $intervention != "tout")
+			{
+				array_push($key, "i.rang");
+				array_push($operand, "=");
+				array_push($value, $intervention);
+			}
+
 			if($paiement != "" && $paiement != "tout")
 			{
 				array_push($key, "p.rang");

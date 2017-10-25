@@ -268,16 +268,16 @@
 			}
 
 			$phases = $this->Phase_Model->findAll(); 
-			$etat = array();
+			$etatPhase = array();
 
 			foreach ($phases as $phase)
 			{
 				$index = $phase->getValeur();
-				$etat[$index] = array();
+				$etatPhase[$index] = array();
 
 				for($i = 1;$i <= $maxRang;$i++)
 				{
-					$etat[$index][$i] = array();
+					$etatPhase[$index][$i] = array();
 				}
 				
 				foreach ($terroir->getGroupeTravails() as $gt) 
@@ -287,7 +287,7 @@
 						if($phase == $inter->getPhase())
 						{
 							$rang = $inter->getRang();
-							array_push($etat[$index][$rang], $inter);
+							array_push($etatPhase[$index][$rang], $inter);
 						}
 					}
 				}

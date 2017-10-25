@@ -245,7 +245,7 @@
 				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo number_format($terroir->getNbBenef(), 0, ",", " "); ?>
+				  							<a href="javascript:etatBenef();"><?php echo number_format($terroir->getNbBenef(), 0, ",", " "); ?></a>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >BENEFICIAIRES</span>
 				  					</div>
@@ -254,7 +254,7 @@
 				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo number_format($terroir->getNbInapte(), 0, ",", " "); ?>
+				  							<a href="javascript:etatInapte();"><?php echo number_format($terroir->getNbInapte(), 0, ",", " "); ?></a>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >INAPTES</span>
 				  					</div>
@@ -263,7 +263,7 @@
 				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo number_format($terroir->getNbBenef() - $terroir->getNbInapte(), 0, ",", " "); ?>
+				  							<a href="javascript:etatTravailleur();"><?php echo number_format($terroir->getNbBenef() - $terroir->getNbInapte(), 0, ",", " "); ?></a>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >NB TRAVAILLEURS</span>
 				  					</div>
@@ -272,7 +272,7 @@
 				  				<div class="col-lg-2" style="border-left: solid 2px #999;">
 				  					<div class="content-group">
 				  						<h4 class="text-semibold no-margin" style="margin: 0;">
-				  							<?php echo number_format(($terroir->getNbBenef() / $terroir->getNbInapte()), 2, ",", " ")."%"; ?>
+				  							<?php echo number_format(($terroir->getNbInapte() / $terroir->getNbBenef())*100), 2, ",", " ")."%"; ?>
 				  						</h4>
 				  						<span class="text-muted text-size-small" >POURCENTAGE INAPTE</span>
 				  					</div>

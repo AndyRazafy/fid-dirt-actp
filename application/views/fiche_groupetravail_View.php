@@ -40,7 +40,7 @@
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php echo number_format($groupetravail->getNbBenef(), 0, ",", " "); ?>
 			  						</h5>
-			  						<span class="text-muted text-size-small">NB BENEFICIAIRE</span>
+			  						<span class="text-muted text-size-small">NB BENEFICIAIRES</span>
 			  					</div>
 			  				</div>
 			  				
@@ -49,7 +49,7 @@
 			  						<h5 class="text-semibold no-margin" style="margin: 0;">
 			  							<?php echo number_format($groupetravail->getNbInapte(), 0, ",", " "); ?>
 			  						</h5>
-			  						<span class="text-muted text-size-small" >NB INAPTE</span>
+			  						<span class="text-muted text-size-small" >NB INAPTES</span>
 			  					</div>
 			  				</div>
 
@@ -60,7 +60,7 @@
 			  								echo number_format($groupetravail->getNbBenef() - $groupetravail->getNbInapte(), 0, ",", " ");
 			  							?>
 			  						</h5>
-			  						<span class="text-muted text-size-small" >NB TRAVAILLEUR</span>
+			  						<span class="text-muted text-size-small" >NB TRAVAILLEURS</span>
 			  					</div>
 			  				</div>
 
